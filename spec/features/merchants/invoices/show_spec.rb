@@ -51,11 +51,10 @@ RSpec.describe 'Merchant Invoices Show page' do
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
+    visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
   end
 
   it 'shows information for specific id' do
-    visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
-
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice1.status)
     expect(page).to have_content(@invoice1.created_at_formatted)
@@ -63,8 +62,6 @@ RSpec.describe 'Merchant Invoices Show page' do
   end
 
   it 'Shows all items on the invoice' do
-    visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
-
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item2.name)
     expect(page).to have_content(@invoice1.item_quantity(@item1.id))
@@ -78,5 +75,9 @@ RSpec.describe 'Merchant Invoices Show page' do
     expect(page).to_not have_content(@item4.name)
     expect(page).to_not have_content(@item5.name)
     expect(page).to_not have_content(@item6.name)
+  end
+
+  it 'shows total revenue' do
+    expect(page).to have_content('$59,000')
   end
 end
