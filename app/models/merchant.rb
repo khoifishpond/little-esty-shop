@@ -4,6 +4,7 @@ class Merchant < ApplicationRecord
   def favorite_customers
     Customer.select("customers.*, COUNT(transactions.result) as purchases")
       .joins(invoices: [:items, :transactions])
+      .where("items.merchant_id = ?", id)
       .merge(Transaction.purchase)
       .group(:id)
       .order(purchases: :desc)
@@ -16,19 +17,18 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_items
-    items.joins(invoices: [:invoice_items, :transactions])
-         .where('transactions.result = ?', 0)
-         .select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue')
-         .group(:id)
-         .order(revenue: :desc)
-         .limit(5)
+    items.joins(invoice_items: {invoice: :transactions})
+    .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+    .where("transactions.result = ?", 0)
+    .group(:id)
+    .order(revenue: :desc)
+    .limit(5)
   end
 
   def all_invoices
-    require "pry"; binding.pry
-    items.joins(:invoices)
-         .select("invoices.id AS invoice_id, item_id")
-         .group(:invoice_id)
-
+    Invoice.select("invoices.*")
+          .joins(:items)
+          .where("items.merchant_id = ?", id)
+          .group(:id)
   end
 end

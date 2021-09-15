@@ -56,14 +56,11 @@ RSpec.describe 'Merchant invoices index page' do
 
   it 'shows all the invoices that include one of the merchants items' do
     visit "/merchants/#{@merch1.id}/invoices"
-
+    
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice2.id)
     expect(page).to have_content(@invoice3.id)
     expect(page).to have_content(@invoice4.id)
     expect(page).to have_content(@invoice5.id)
   end
-
-
-
 end
