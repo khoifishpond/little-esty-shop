@@ -14,7 +14,7 @@ RSpec.describe 'Admin dashboard' do
     @item1 = create(:item, merchant: @merch1)
     @item2 = create(:item, merchant: @merch1)
     @item3 = create(:item, merchant: @merch1)
-    @invoice1 = create(:invoice, customer: @cust1)
+    @invoice1 = create(:invoice, customer: @cust1, created_at: "2012-04-27 14:53:59 UTC")
     @invoice2 = create(:invoice, customer: @cust2)
     @invoice3 = create(:invoice, customer: @cust2)
     @invoice4 = create(:invoice, customer: @cust3)
@@ -152,11 +152,18 @@ RSpec.describe 'Admin dashboard' do
   end
 
   it 'shows incomplete invoices' do
-    save_and_open_page
     expect(page).to have_content("Incomplete Invoices")
     expect(page).to have_link(@invoice1.id)
     expect(page).to have_link(@invoice2.id)
     expect(page).to have_link(@invoice4.id)
     expect(page).to have_link(@invoice6.id)
+  end
+
+  it 'shows date of incomplete invoices' do
+    save_and_open_page
+    expect(page).to have_content(@invoice1.created_at_formatted)
+    expect(page).to have_content(@invoice2.created_at_formatted)
+    expect(page).to have_content(@invoice4.created_at_formatted)
+    expect(page).to have_content(@invoice6.created_at_formatted)
   end
 end
