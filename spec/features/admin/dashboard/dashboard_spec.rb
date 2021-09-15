@@ -35,12 +35,12 @@ RSpec.describe 'Admin dashboard' do
     @invoice19 = create(:invoice, customer: @cust7)
     InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1)
     InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
-    InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
+    InvoiceItem.create(item: @item3, invoice: @invoice2)
     InvoiceItem.create(item: @item1, invoice: @invoice2)
     InvoiceItem.create(item: @item1, invoice: @invoice3)
-    InvoiceItem.create(item: @item1, invoice: @invoice4)
+    InvoiceItem.create(item: @item1, invoice: @invoice4, status: 0)
     InvoiceItem.create(item: @item1, invoice: @invoice5)
-    InvoiceItem.create(item: @item1, invoice: @invoice6)
+    InvoiceItem.create(item: @item1, invoice: @invoice6, status: 0)
     InvoiceItem.create(item: @item2, invoice: @invoice7)
     InvoiceItem.create(item: @item2, invoice: @invoice8)
     InvoiceItem.create(item: @item2, invoice: @invoice9)
@@ -149,5 +149,13 @@ RSpec.describe 'Admin dashboard' do
       expect(page).to have_content(@cust2.first_name)
       expect(page).to have_content(@cust2.last_name)
     end
+  end
+
+  it 'shows incomplete invoices' do
+    expect(page).to have_content("Incomplete Invoices")
+    expect(page).to have_link(@invoice1.id)
+    expect(page).to have_link(@invoice2.id)
+    expect(page).to have_link(@invoice4.id)
+    expect(page).to have_link(@invoice5.id)
   end
 end
