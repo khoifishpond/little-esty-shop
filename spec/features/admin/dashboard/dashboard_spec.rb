@@ -160,7 +160,6 @@ RSpec.describe 'Admin dashboard' do
   end
 
   it 'shows date of incomplete invoices' do
-    save_and_open_page
     expect(page).to have_content(@invoice1.created_at_formatted)
     expect(page).to have_content(@invoice2.created_at_formatted)
     expect(page).to have_content(@invoice4.created_at_formatted)
