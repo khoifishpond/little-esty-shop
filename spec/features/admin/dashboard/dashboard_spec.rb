@@ -94,56 +94,60 @@ RSpec.describe 'Admin dashboard' do
     create(:transaction, invoice: @invoice18, result: 'success')
     create(:transaction, invoice: @invoice19, result: 'success')
     create(:transaction, invoice: @invoice19, result: 'success')
+
+    visit '/admin'
   end
 
   it 'shows that you are on the admin dashboard' do
-    visit '/admin'
-
     within('h1') do
       expect(page).to have_content("Admin Dashboard")
     end
   end
 
   it 'has a link to the admin merchants index' do
-    visit '/admin'
-
     expect(page).to have_link("Admin Merchants Index")
   end
 
   it 'has a link to the admin merchants index' do
-    visit '/admin'
-
     expect(page).to have_link("Admin Invoices Index")
   end
 
   it 'takes you to the admin merchants index when you click the link' do
-    visit '/admin'
-
     click_link "Admin Merchants Index"
 
     expect(current_path).to eq("/admin/merchants")
   end
 
   it 'takes you to the admin merchants index when you click the link' do
-    visit '/admin'
-
     click_link "Admin Invoices Index"
 
     expect(current_path).to eq("/admin/invoices")
   end
 
   it 'has the names of the top five customers' do
-    visit '/admin'
-    save_and_open_page
-    expect(page).to have_content(@cust4.first_name)
-    expect(page).to have_content(@cust5.first_name)
-    expect(page).to have_content(@cust3.first_name)
-    expect(page).to have_content(@cust7.first_name)
-    expect(page).to have_content(@cust2.first_name)
-    expect(page).to have_content(@cust4.last_name)
-    expect(page).to have_content(@cust5.last_name)
-    expect(page).to have_content(@cust3.last_name)
-    expect(page).to have_content(@cust7.last_name)
-    expect(page).to have_content(@cust2.last_name)
+    within("#customer-#{@cust4.id}") do
+      expect(page).to have_content(@cust4.first_name)
+      expect(page).to have_content(@cust4.last_name)
+    end
+
+    within("#customer-#{@cust5.id}") do
+      expect(page).to have_content(@cust5.first_name)
+      expect(page).to have_content(@cust5.last_name)
+    end
+
+    within("#customer-#{@cust3.id}") do
+      expect(page).to have_content(@cust3.first_name)
+      expect(page).to have_content(@cust3.last_name)
+    end
+
+    within("#customer-#{@cust7.id}") do
+      expect(page).to have_content(@cust7.first_name)
+      expect(page).to have_content(@cust7.last_name)
+    end
+
+    within("#customer-#{@cust2.id}") do
+      expect(page).to have_content(@cust2.first_name)
+      expect(page).to have_content(@cust2.last_name)
+    end
   end
 end
