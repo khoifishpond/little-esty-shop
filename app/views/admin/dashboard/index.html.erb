@@ -8,6 +8,8 @@
 <h3>Top 5 Customers</h3>
 <ul>
   <% @customers.top_five.each do |cust| %>
-    <li><%= cust.f_name %> <%= cust.l_name %> <%= cust.successful %></li><br>
+    <section id="customer-<%= cust.id %>">
+      <li><%= cust.first_name %> <%= cust.last_name %> - <%= cust.successful %> purchases</li>
+    </section>
   <% end %>
 </ul>
