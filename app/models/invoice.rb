@@ -21,4 +21,16 @@ class Invoice < ApplicationRecord
   def customer_by_id
     Customer.find(customer_id)
   end
+
+  def item_quantity(item_id)
+    invoice_items.where(item_id: item_id).first.quantity
+  end
+
+  def item_unit_price(item_id)
+    invoice_items.where(item_id: item_id).first.unit_price
+  end
+
+  def item_status(item_id)
+    invoice_items.where(item_id: item_id).first.status
+  end
 end

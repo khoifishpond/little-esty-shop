@@ -3,3 +3,20 @@
 <p>Status: <%= @invoice.status %></p>
 <p>Date Created: <%= @invoice.created_at_formatted %></p>
 <p>Customer Name: <%= @invoice.customer_by_id.first_name %> <%= @invoice.customer_by_id.last_name %></p>
+
+<table style="width:60%; text-align:center">
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <% @invoice.items.each do |item| %>
+    <tr>
+      <td> <%= item.name %> </td>
+      <td> <%= @invoice.item_quantity(item.id) %> </td>
+      <td> <%= number_to_currency(@invoice.item_unit_price(item.id)) %> </td>
+      <td> <%= @invoice.item_status(item.id) %> </td>
+    </tr>
+  <% end %>
+</table>

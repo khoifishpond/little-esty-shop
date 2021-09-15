@@ -25,8 +25,8 @@ RSpec.describe 'Merchant Invoices Show page' do
     @invoice6 = create(:invoice, customer: @cust6)
     @invoice7 = create(:invoice, customer: @cust7)
     @invoice8 = create(:invoice, customer: @cust7)
-    InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1)
-    InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
+    InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 15, unit_price: 1000)
+    InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 11, unit_price: 4000)
     InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item1, invoice: @invoice2)
     InvoiceItem.create(item: @item1, invoice: @invoice3)
@@ -53,15 +53,30 @@ RSpec.describe 'Merchant Invoices Show page' do
     create(:transaction, invoice: @invoice6, result: 'success')
   end
 
-  describe 'show page information' do
-    it 'shows information for specific id' do
-      visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
+  it 'shows information for specific id' do
+    visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
 
-      expect(page).to have_content(@invoice1.id)
-      expect(page).to have_content(@invoice1.status)
-      expect(page).to have_content(@invoice1.created_at_formatted)
-      expect(page).to have_content("#{@cust1.first_name} #{@cust1.last_name}")
-    end
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.status)
+    expect(page).to have_content(@invoice1.created_at_formatted)
+    expect(page).to have_content("#{@cust1.first_name} #{@cust1.last_name}")
   end
 
+  it 'Shows all items on the invoice' do
+    visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
+
+    expect(page).to have_content(@item1.name)
+    expect(page).to have_content(@item2.name)
+    expect(page).to have_content(@invoice1.item_quantity(@item1.id))
+    expect(page).to have_content(@invoice1.item_quantity(@item2.id))
+    expect(page).to have_content('$1,000.00')
+    expect(page).to have_content('$4,000.00')
+    expect(page).to have_content(@invoice1.item_status(@item1.id))
+    expect(page).to have_content(@invoice1.item_status(@item2.id))
+
+    expect(page).to_not have_content(@item3.name)
+    expect(page).to_not have_content(@item4.name)
+    expect(page).to_not have_content(@item5.name)
+    expect(page).to_not have_content(@item6.name)
+  end
 end
