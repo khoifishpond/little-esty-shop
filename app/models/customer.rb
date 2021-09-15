@@ -14,7 +14,7 @@ class Customer < ApplicationRecord
     Customer.joins(invoices: :invoice_items)
             .select("invoices.id as invoice_id, invoices.created_at as created_at")
             .where.not("invoice_items.status = ?", 2)
-            .order("invoices.created_at desc")
+            .order("invoices.created_at")
   end
 
   def created_at_formatted
