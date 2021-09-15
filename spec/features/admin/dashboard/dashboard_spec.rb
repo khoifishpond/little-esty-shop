@@ -152,10 +152,11 @@ RSpec.describe 'Admin dashboard' do
   end
 
   it 'shows incomplete invoices' do
+    save_and_open_page
     expect(page).to have_content("Incomplete Invoices")
     expect(page).to have_link(@invoice1.id)
     expect(page).to have_link(@invoice2.id)
     expect(page).to have_link(@invoice4.id)
-    expect(page).to have_link(@invoice5.id)
+    expect(page).to have_link(@invoice6.id)
   end
 end
