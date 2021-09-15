@@ -86,11 +86,11 @@ RSpec.describe 'merchants items index page' do
       @cust6 = create(:customer)
       @item1 = create(:item, merchant: @merch1, unit_price: 100)
       @item2 = create(:item, merchant: @merch1, unit_price: 200)
-      @item3 = create(:item, merchant: @merch1, unit_price: 500)
+      @item3 = create(:item, merchant: @merch1, unit_price: 300)
       @item4 = create(:item, merchant: @merch1, unit_price: 600)
       @item5 = create(:item, merchant: @merch1, unit_price: 1000)
       @item6 = create(:item, merchant: @merch1, unit_price: 2000)
-      @item7 = create(:item, merchant: @merch1, unit_price: 5000)
+      @item7 = create(:item, merchant: @merch1, unit_price: 4000)
       @invoice1 = create(:invoice, customer: @cust1)
       @invoice2 = create(:invoice, customer: @cust2)
       @invoice3 = create(:invoice, customer: @cust3)
@@ -107,8 +107,8 @@ RSpec.describe 'merchants items index page' do
       @invoice14 = create(:invoice, customer: @cust6)
       InvoiceItem.create(item: @item1, invoice: @invoice1, quantity: 1, unit_price: @item1.unit_price)
       InvoiceItem.create(item: @item1, invoice: @invoice2, quantity: 2, unit_price: @item1.unit_price)
-      InvoiceItem.create(item: @item2, invoice: @invoice4, quantity: 4, unit_price: @item2.unit_price)
       InvoiceItem.create(item: @item2, invoice: @invoice3, quantity: 3, unit_price: @item2.unit_price)
+      InvoiceItem.create(item: @item2, invoice: @invoice4, quantity: 4, unit_price: @item2.unit_price)
       InvoiceItem.create(item: @item3, invoice: @invoice5, quantity: 5, unit_price: @item3.unit_price)
       InvoiceItem.create(item: @item3, invoice: @invoice6, quantity: 6, unit_price: @item3.unit_price)
       InvoiceItem.create(item: @item4, invoice: @invoice7, quantity: 7, unit_price: @item4.unit_price)
@@ -143,14 +143,13 @@ RSpec.describe 'merchants items index page' do
       visit "/merchants/#{@merch1.id}/items"
     end
 
+    # add appear_before
     it 'shows the 5 most popular items on the page' do
-
       expect(page).to have_content("Most Popular Items")
-      expect(page).to have_content(@item7.name)
-      expect(page).to have_content(@item6.name)
-      expect(page).to have_content(@item5.name)
-      expect(page).to have_content(@item4.name)
-      expect(page).to have_content(@item3.name)
+      expect(@item7.name).to appear_before(@item6.name)
+      expect(@item6.name).to appear_before(@item5.name)
+      expect(@item5.name).to appear_before(@item4.name)
+      expect(@item4.name).to appear_before(@item3.name)
     end
 
     it 'has links to all 5 popular items' do
@@ -235,7 +234,7 @@ RSpec.describe 'merchants items index page' do
       create(:transaction, invoice: @invoice14, result: 'success')
       visit "/merchants/#{@merch1.id}/items"
     end
-    
+
     it 'top items best day' do
       within("#popular-#{@item7.id}") do
         expect(page).to have_content("Top selling date for #{@item7.name} was #{@invoice14.created_at_short_format}")
