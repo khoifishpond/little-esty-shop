@@ -11,8 +11,13 @@ class Customer < ApplicationRecord
   end
 
   def self.incomplete_invoices
-    a = Customer.joins(invoices: :invoice_items)
-              .select("invoices.id as invoice_id")
-              .where.not("invoice_items.status = ?", 2)
+    Customer.joins(invoices: :invoice_items)
+            .select("invoices.id as invoice_id, invoices.created_at as created_at")
+            .where.not("invoice_items.status = ?", 2)
+            .order("invoices.created_at desc")
+  end
+
+  def created_at_formatted
+    created_at.strftime("%A, %B %d, %Y")
   end
 end
