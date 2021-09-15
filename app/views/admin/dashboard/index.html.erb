@@ -20,7 +20,7 @@
   <h3>Incomplete Invoices</h3>
   <ul>
     <% @customers.incomplete_invoices.each do |invoice| %>
-      <li><%= link_to invoice.invoice_id, admin_invoices_path(id: invoice.invoice_id) %></li>
+      <li><%= link_to invoice.invoice_id, admin_invoices_path(id: invoice.invoice_id) %> created at <%= invoice.created_at_formatted %></li>
     <% end %>
   </ul>
 </section>
