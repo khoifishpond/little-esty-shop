@@ -9,4 +9,10 @@ class Customer < ApplicationRecord
             .order(successful: :desc, first_name: :asc, last_name: :asc)
             .limit(5)
   end
+
+  def self.incomplete_invoices
+    a = Customer.joins(invoices: :invoice_items)
+              .select("invoices.id as invoice_id")
+              .where.not("invoice_items.status = ?", 2)
+  end
 end
