@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant invoices index page' do
-
+RSpec.describe 'Merchant Invoices Show page' do
   before(:each) do
     @merch1 = create(:merchant)
     @merch2 = create(:merchant)
@@ -54,22 +53,15 @@ RSpec.describe 'Merchant invoices index page' do
     create(:transaction, invoice: @invoice6, result: 'success')
   end
 
-  it 'shows all the invoices that include one of the merchants items' do
-    visit "/merchants/#{@merch1.id}/invoices"
+  describe 'show page information' do
+    it 'shows information for specific id' do
+      visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
 
-    expect(page).to have_content(@invoice1.id)
-    expect(page).to have_content(@invoice2.id)
-    expect(page).to have_content(@invoice3.id)
-    expect(page).to have_content(@invoice4.id)
-    expect(page).to have_content(@invoice5.id)
-  end
-
-  it 'each id links to a merchant invoice show page' do
-    visit "/merchants/#{@merch1.id}/invoices"
-
-    click_link "#{@invoice3.id}"
-
-    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice3.id}")
+      expect(page).to have_content(@invoice1.id)
+      expect(page).to have_content(@invoice1.status)
+      expect(page).to have_content(@invoice1.created_at_formatted)
+      expect(page).to have_content("#{@cust1.first_name} #{@cust1.last_name}")
+    end
   end
 
 end

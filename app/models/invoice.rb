@@ -17,4 +17,8 @@ class Invoice < ApplicationRecord
   def created_at_short_format
     created_at.strftime("%x")
   end
+
+  def customer_by_id
+    Customer.find(customer_id)
+  end
 end
