@@ -2,6 +2,7 @@
 
 <p>Status: <%= @invoice.status %></p>
 <p>Date Created: <%= @invoice.created_at_formatted %></p>
+<p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
 <p>Customer Name: <%= @invoice.customer_by_id.first_name %> <%= @invoice.customer_by_id.last_name %></p>
 
 <table style="width:60%; text-align:center">

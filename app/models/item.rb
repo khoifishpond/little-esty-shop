@@ -40,5 +40,4 @@ class Item < ApplicationRecord
   def revenue
     invoice_items.sum('quantity * unit_price')
   end
-
 end

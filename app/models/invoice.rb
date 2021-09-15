@@ -33,4 +33,8 @@ class Invoice < ApplicationRecord
   def item_status(item_id)
     invoice_items.where(item_id: item_id).first.status
   end
+
+  def total_revenue
+    invoice_items.where(invoice_id: id).sum('quantity * unit_price')
+  end
 end
