@@ -19,7 +19,7 @@
         <td><%= @invoice.item_quantity(item.id) %></td>
         <td><%= number_to_currency(@invoice.item_unit_price(item.id)) %></td>
         <td><%= form_with url: invoice_item_path(invoice_item_id: item.invoice_item_by_id(@invoice.id).id, merchant_id: item.merchant.id), method: :patch, local: true do |f| %>
-              <%= f.select :status, ["pending", "packaged", "shipped"], value: item.invoice_item_by_id(@invoice.id).status %>
+              <%= f.select :ii_status, ["pending", "packaged", "shipped"], selected: item.invoice_item_by_id(@invoice.id).status %>
               <%= f.submit 'Update Item Status' %>
             <% end %> </td>
       </tr>
