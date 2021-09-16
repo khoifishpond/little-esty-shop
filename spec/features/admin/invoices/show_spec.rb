@@ -52,7 +52,6 @@ describe 'admin invoices show page' do
   end
 
   it 'has a select option for invoice status' do
-    # save_and_open_page
     within("#invoice-#{@invoice1.id}-status") do
       select 'completed', from: 'status'
       click_button('Update Invoice Status')
