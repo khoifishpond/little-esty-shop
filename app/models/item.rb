@@ -35,8 +35,4 @@ class Item < ApplicationRecord
   def revenue
     invoice_items.sum('quantity * unit_price')
   end
-
-  def invoice_item_by_id(invoice_id)
-    invoice_items.where(invoice_id: invoice_id).first
-  end
 end
