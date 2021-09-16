@@ -40,8 +40,8 @@ class MerchantItemsController < ApplicationController
     end
   end
 
-
   private
+  
   def item_params
     params.permit(:name, :description, :unit_price, :enable)
   end
