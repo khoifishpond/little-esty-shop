@@ -1,0 +1,22 @@
+<h1>Invoice #<%= @invoice.id %></h1>
+
+<h3>Status</h3>
+<p><%= @invoice.status %></p>
+<p>Created on: <%= @invoice.created_at_formatted %></p>
+
+<h3>Customer</h3>
+<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
+
+<h3>Items on this Invoice:</h3>
+<ul>
+  <% @invoice.items.each do |item| %>
+    <div id="item-<%= item.id %>">
+      <li><%= item.name %></li>
+        <ul>
+          <li>Quantity: <%= @invoice.item_quantity(item.id) %></li>
+          <li>Unit Price: <%= number_to_currency(@invoice.item_unit_price(item.id).fdiv(100)) %></li>
+          <li>Status: <%= @invoice.item_status(item.id) %></li>
+        </ul>
+    </div>
+  <% end %>
+</ul>
