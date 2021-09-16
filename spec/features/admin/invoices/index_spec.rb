@@ -96,4 +96,20 @@ RSpec.describe 'Admin Invoices Index' do
 
     visit '/admin/invoices'
   end
+
+  xit 'Shows all Invoice IDs in system' do
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
+
+  end
 end
