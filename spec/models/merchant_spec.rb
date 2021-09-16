@@ -140,5 +140,19 @@ RSpec.describe Merchant, type: :model do
 
       expect(@merch1.top_five_items).to eq(expected)
     end
+
+    it '#all_invoices' do
+      @merch1 = create(:merchant)
+      @cust1 = create(:customer)
+      @item1 = create(:item, merchant: @merch1, unit_price: 100)
+      @invoice1 = create(:invoice, customer: @cust1)
+      @invoice2 = create(:invoice, customer: @cust1)
+      @invoice3 = create(:invoice, customer: @cust1)
+      InvoiceItem.create(item: @item1, invoice: @invoice1)
+      InvoiceItem.create(item: @item1, invoice: @invoice2)
+      InvoiceItem.create(item: @item1, invoice: @invoice3)
+
+      expect(@merch1.all_invoices).to eq([@invoice1, @invoice2, @invoice3])
+    end
   end
 end
