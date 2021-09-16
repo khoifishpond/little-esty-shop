@@ -14,7 +14,7 @@ describe 'admin invoices show page' do
 
     visit "/admin/invoices/#{@invoice1.id}"
   end
-  
+
   it 'displays information related to invoice' do
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice1.status)
@@ -24,25 +24,30 @@ describe 'admin invoices show page' do
   end
 
   it 'displays all items on invoice' do
-    within("#item-#{@item1.id}") do
+    within("#item-#{@ii1.id}") do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@ii1.quantity)
       expect(page).to have_content(@ii1.status)
       expect(page).to have_content("$30.00")
     end
 
-    within("#item-#{@item2.id}") do
+    within("#item-#{@ii2.id}") do
       expect(page).to have_content(@item2.name)
       expect(page).to have_content(@ii2.quantity)
       expect(page).to have_content(@ii2.status)
       expect(page).to have_content("$60.00")
     end
 
-    within("#item-#{@item3.id}") do
+    within("#item-#{@ii3.id}") do
       expect(page).to have_content(@item3.name)
       expect(page).to have_content(@ii3.quantity)
       expect(page).to have_content(@ii3.status)
       expect(page).to have_content("$45.00")
     end
+  end
+
+  it 'shows total revenue' do
+    save_and_open_page
+    expect(page).to have_content("$1,020.00")
   end
 end
