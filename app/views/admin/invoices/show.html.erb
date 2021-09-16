@@ -4,7 +4,7 @@
 <div id="invoice-<%= @invoice.id %>-status">
 
   <%= form_with url: invoice_path(@invoice), method: :patch, local: true do |f| %>
-  <%= f.label 'Status: ' %>
+    <%= f.label 'Status: ' %>
     <%= f.select :status, ["in progress", "cancelled", "completed"], selected: @invoice.status %>
     <%= f.submit "Update Invoice Status"%>
   <% end %>
