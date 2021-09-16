@@ -64,8 +64,8 @@ RSpec.describe 'Merchant Invoices Show page' do
   it 'Shows all items on the invoice' do
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item2.name)
-    expect(page).to have_content(@invoice1.item_quantity(@item1.id))
-    expect(page).to have_content(@invoice1.item_quantity(@item2.id))
+    expect(page).to have_content(@ii1.quantity)
+    expect(page).to have_content(@ii2.quantity)
     expect(page).to have_content('$1,000.00')
     expect(page).to have_content('$4,000.00')
     expect(page).to have_content(@invoice1.item_status(@item1.id))
@@ -82,7 +82,7 @@ RSpec.describe 'Merchant Invoices Show page' do
   end
 
   it 'has a select box for invoice status' do
-    within("#table-#{@item1.id}") do
+    within("#table-#{@ii1.id}") do
       select 'packaged', from: 'ii_status'
       click_button('Update Item Status')
     end
@@ -92,11 +92,11 @@ RSpec.describe 'Merchant Invoices Show page' do
     expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
     expect(@ii1.status).to eq('packaged')
 
-    within("#table-#{@item1.id}") do
+    within("#table-#{@ii1.id}") do
       expect(find(:css, 'select#ii_status').value ).to eq('packaged')
     end
 
-    within("#table-#{@item2.id}") do
+    within("#table-#{@ii2.id}") do
       select 'pending', from: 'ii_status'
       click_button('Update Item Status')
     end
@@ -106,7 +106,7 @@ RSpec.describe 'Merchant Invoices Show page' do
     expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
     expect(@ii2.status).to eq('pending')
 
-    within("#table-#{@item2.id}") do
+    within("#table-#{@ii2.id}") do
       expect(find(:css, 'select#ii_status').value ).to eq('pending')
     end
   end
