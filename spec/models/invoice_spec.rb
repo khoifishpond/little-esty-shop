@@ -69,10 +69,6 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice1.customer_by_id).to eq(@cust1)
     end
 
-    it '#item_quantity' do
-      expect(@invoice1.item_quantity(@item1.id)).to eq(3)
-    end
-
     it '#item_unit_price' do
       expect(@invoice1.item_unit_price(@item1.id)).to eq(1000)
     end

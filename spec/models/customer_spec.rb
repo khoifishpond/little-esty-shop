@@ -103,5 +103,15 @@ RSpec.describe Customer, type: :model do
     it '#top_five' do
       expect(Customer.top_five).to eq([@cust5, @cust4, @cust3, @cust2, @cust7])
     end
+
+    it '#incomplete_invoices' do
+      expect(Customer.incomplete_invoices.first.invoice_id).to eq(@invoice1.id)
+    end
+
+    it '#created_at_formatted' do
+      expect(@cust1.created_at_formatted).to eq("Tuesday, March 27, 2012")
+    end
   end
+
+
 end
