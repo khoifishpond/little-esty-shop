@@ -47,7 +47,7 @@ describe 'admin invoices show page' do
   end
 
   it 'shows total revenue' do
-    save_and_open_page
+
     expect(page).to have_content("$1,020.00")
   end
 end
