@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
   def update
     @invoice = Invoice.find(params[:id])
-    @invoice.update(status: params[:status])
+    @invoice.update(invoice_params)
 
     redirect_to admin_invoice_path(@invoice)
   end
@@ -9,6 +9,6 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.require(:invoice).permit(:status, :created_at, :updated_at)
+    params.permit(:status, :created_at, :updated_at)
   end
 end
