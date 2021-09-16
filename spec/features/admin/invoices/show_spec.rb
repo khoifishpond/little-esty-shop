@@ -12,7 +12,7 @@ describe 'admin invoices show page' do
     @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, unit_price: @item2.unit_price, quantity: 5, status: 1)
     @ii3 = InvoiceItem.create(item: @item3, invoice: @invoice1, unit_price: @item3.unit_price, quantity: 6, status: 2)
 
-    visit "/admin/invoices/#{@invoice1.id}"
+    visit admin_invoices_path(@invoice1)
   end
 
   it 'displays information related to invoice' do
@@ -51,8 +51,8 @@ describe 'admin invoices show page' do
   end
 
   it 'has a select option for invoice status' do
-    save_and_open_page
-    within('#status_update') do
+
+    within("#invoice-#{@invoice1.id}-status") do
       select 'completed', from: :invoice_status
       click_button('Update Invoice Status')
     end
