@@ -30,5 +30,6 @@ class Merchant < ApplicationRecord
           .joins(:items)
           .where("items.merchant_id = ?", id)
           .group(:id)
+          .order(:id)
   end
 end
