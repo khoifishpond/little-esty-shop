@@ -3,10 +3,21 @@ class Customer < ApplicationRecord
 
   def self.top_five
     Customer.joins(invoices: :transactions)
-            .select('COUNT(transactions.result) as successful, customers.id, customers.first_name as f_name, customers.last_name as l_name')
+            .select('customers.*, COUNT(transactions.result) as successful')
             .group('customers.id')
-            .where('transactions.result = ?', 0)
-            .order(successful: :desc, f_name: :asc, l_name: :asc)
+            .merge(Transaction.purchase)
+            .order(successful: :desc, first_name: :asc, last_name: :asc)
             .limit(5)
+  end
+
+  def self.incomplete_invoices
+    Customer.joins(invoices: :invoice_items)
+            .select("invoices.id as invoice_id, invoices.created_at as created_at")
+            .where.not("invoice_items.status = ?", 2)
+            .order("invoices.created_at")
+  end
+
+  def created_at_formatted
+    created_at.strftime("%A, %B %d, %Y")
   end
 end
