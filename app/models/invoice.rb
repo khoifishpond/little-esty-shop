@@ -17,4 +17,24 @@ class Invoice < ApplicationRecord
   def created_at_short_format
     created_at.strftime("%x")
   end
+
+  def customer_by_id
+    Customer.find(customer_id)
+  end
+
+  def item_quantity(item_id)
+    invoice_items.where(item_id: item_id).first.quantity
+  end
+
+  def item_unit_price(item_id)
+    invoice_items.where(item_id: item_id).first.unit_price
+  end
+
+  def item_status(item_id)
+    invoice_items.where(item_id: item_id).first.status
+  end
+
+  def total_revenue
+    invoice_items.where(invoice_id: id).sum('quantity * unit_price')
+  end
 end

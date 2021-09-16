@@ -13,25 +13,40 @@ RSpec.describe Item, type: :model do
     it { should validate_numericality_of(:unit_price) }
   end
 
-  it "shows only enabled items" do
-    @merchant = Merchant.create!(name: "Steve")
-    @merchant_2 = Merchant.create!(name: "Kevin")
-    @item_1 = @merchant.items.create!(name: "Lamp", description: "Sheds light", unit_price: 5, enable: 0)
-    @item_2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10, enable: 0)
-    @item_3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50)
-    @item_4 = @merchant_2.items.create!(name: "Table", description: "Eat on it", unit_price: 100, enable: 0)
+  before :each do
+    @merch1 = create(:merchant)
+    @merch2 = create(:merchant)
+    @item1 = create(:item, merchant: @merch1, enable: 0, unit_price: 100)
+    @item2 = create(:item, merchant: @merch1, enable: 0, unit_price: 5)
+    @item3 = create(:item, merchant: @merch1, unit_price: 5)
+    @item4 = create(:item, merchant: @merch2, enable: 0, unit_price: 5)
+    @cust1 = create(:customer)
+    @cust2 = create(:customer)
+    @invoice1 = create(:invoice, customer: @cust1, created_at: '2012-03-27 14:53:59 UTC')
+    @invoice2 = create(:invoice, customer: @cust2)
+    @ii = InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 3, unit_price: 1000)
+    InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
+    InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
 
-    expect(Item.enabled_items).to eq([@item_1, @item_2, @item_4])
+  end
+
+  it "shows only enabled items" do
+    expect(Item.enabled_items).to eq([@item1, @item2, @item4])
   end
 
   it "shows only disabled items" do
-    @merchant = Merchant.create!(name: "Steve")
-    @merchant_2 = Merchant.create!(name: "Kevin")
-    @item_1 = @merchant.items.create!(name: "Lamp", description: "Sheds light", unit_price: 5, enable: 0)
-    @item_2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10, enable: 0)
-    @item_3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50)
-    @item_4 = @merchant_2.items.create!(name: "Table", description: "Eat on it", unit_price: 100, enable: 0)
+    expect(Item.disabled_items).to eq([@item3])
+  end
 
-    expect(Item.disabled_items).to eq([@item_3])
+  it "#best_day" do
+    expect(@item1.best_day.created_at).to eq(@invoice1.created_at.strftime('%Y-%m-%d'))
+  end
+
+  it "#revenue" do
+    expect(@item1.revenue).to eq(@ii.unit_price * @ii.quantity)
+  end
+
+  it "#invoice_item_by_id" do
+    expect(@item1.invoice_item_by_id(@invoice1.id)).to eq(@ii)
   end
 end

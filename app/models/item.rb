@@ -19,11 +19,6 @@ class Item < ApplicationRecord
     where(enable: 1)
   end
 
-  # def all_merchants_invoices(merchant_id)
-  #   require "pry"; binding.pry
-  #   invoices.where("merchant_id = ?", merchant_id)
-  # end
-
   def ordered_invoices
     invoices.order(:created_at)
   end
@@ -39,5 +34,9 @@ class Item < ApplicationRecord
 
   def revenue
     invoice_items.sum('quantity * unit_price')
+  end
+
+  def invoice_item_by_id(invoice_id)
+    invoice_items.where(invoice_id: invoice_id).first
   end
 end
