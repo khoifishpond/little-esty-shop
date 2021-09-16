@@ -80,4 +80,27 @@ RSpec.describe 'Merchant Invoices Show page' do
   it 'shows total revenue' do
     expect(page).to have_content('$59,000')
   end
+
+  it 'has a select box for invoice status' do
+    within("#table-#{@item1.id}") do
+      select 'shipped', from: 'status'
+      click_button('Update Item Status')
+    end
+
+    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+
+    within("#table-#{@item1.id}") do
+      expect(page).to have_content('shipped')
+    end
+
+    within("#table-#{@item2.id}") do
+      select 'pending', from: 'status'
+    end
+
+    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+
+    within("#table-#{@item2.id}") do
+      expect(page).to have_content('pending')
+    end
+  end
 end
