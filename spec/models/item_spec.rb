@@ -45,8 +45,4 @@ RSpec.describe Item, type: :model do
   it "#revenue" do
     expect(@item1.revenue).to eq(@ii.unit_price * @ii.quantity)
   end
-
-  it "#invoice_item_by_id" do
-    expect(@item1.invoice_item_by_id(@invoice1.id)).to eq(@ii)
-  end
 end

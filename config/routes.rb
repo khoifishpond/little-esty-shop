@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
   end
 
+  resources :invoices, only: :update
+
   resources :invoice_items, only: :update
 
   get '/admin', to: 'admins#index'
