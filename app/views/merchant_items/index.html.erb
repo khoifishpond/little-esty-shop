@@ -16,9 +16,9 @@
   <ul>
     <% @merchant.items.enabled_items.each do |item| %>
       <div id="item-<%= item.id %>">
-        <li><%= link_to item.name, merchant_item_path(id: item.id) %></li>
+        <li><%= link_to item.name, merchant_item_path(item) %></li>
           <%= item.enable %><br>
-          <%= button_to "Disable", merchant_item_path(id: item.id), method: :patch, params:{enable: "disabled"} %>
+          <%= button_to "Disable", merchant_item_path(item), method: :patch, params:{enable: "disabled"} %>
       </div>
     <% end %>
   </ul>
@@ -29,9 +29,9 @@
   <ul>
     <% @merchant.items.disabled_items.each do |item| %>
       <div id="item-<%= item.id %>">
-        <li><%= link_to item.name, merchant_item_path(id: item.id) %></li>
+        <li><%= link_to item.name, merchant_item_path(item) %></li>
           <%= item.enable %><br>
-          <%= button_to "Enable", merchant_item_path(id: item.id), method: :patch, params:{enable: "enabled"} %>
+          <%= button_to "Enable", merchant_item_path(item), method: :patch, params:{enable: "enabled"} %>
       </div>
     <% end %>
   </ul>

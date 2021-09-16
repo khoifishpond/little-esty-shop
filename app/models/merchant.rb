@@ -1,6 +1,11 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
 
+  enum status: {
+    enabled: 0,
+    disabled: 1
+  }
+
   def favorite_customers
     Customer.select("customers.*, COUNT(transactions.result) as purchases")
       .joins(invoices: [:items, :transactions])
