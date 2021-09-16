@@ -5,7 +5,7 @@
 <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
 <p>Customer Name: <%= @invoice.customer_by_id.first_name %> <%= @invoice.customer_by_id.last_name %></p>
 
-<table style="width:60%; text-align:center">
+<table style="text-align:center">
   <tr>
     <th>Item Name</th>
     <th>Quantity</th>
@@ -13,11 +13,16 @@
     <th>Status</th>
   </tr>
   <% @invoice.items.each do |item| %>
-    <tr>
-      <td> <%= item.name %> </td>
-      <td> <%= @invoice.item_quantity(item.id) %> </td>
-      <td> <%= number_to_currency(@invoice.item_unit_price(item.id)) %> </td>
-      <td> <%= @invoice.item_status(item.id) %> </td>
-    </tr>
+    <div id="table-<%= item.id %>">
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= @invoice.item_quantity(item.id) %></td>
+        <td><%= number_to_currency(@invoice.item_unit_price(item.id)) %></td>
+        <td><%= form_with url: invoice_item_path(invoice_item_id: item.invoice_item_by_id(@invoice.id).id, merchant_id: item.merchant.id), method: :patch, local: true do |f| %>
+              <%= f.select :status, ["pending", "packaged", "shipped"], value: item.invoice_item_by_id(@invoice.id).status %>
+              <%= f.submit 'Update Item Status' %>
+            <% end %> </td>
+      </tr>
+    </div>
   <% end %>
 </table>

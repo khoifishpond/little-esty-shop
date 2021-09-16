@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :invoices
   end
 
+  resources :invoice_items, only: :update
+
   get '/admin', to: 'admins#index'
 
   get "/merchants/:merchant_id/dashboard", to: "merchants#dashboard"
