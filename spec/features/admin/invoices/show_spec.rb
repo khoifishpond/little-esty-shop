@@ -12,10 +12,11 @@ describe 'admin invoices show page' do
     @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, unit_price: @item2.unit_price, quantity: 5, status: 1)
     @ii3 = InvoiceItem.create(item: @item3, invoice: @invoice1, unit_price: @item3.unit_price, quantity: 6, status: 2)
 
-    visit admin_invoices_path(@invoice1)
+    visit admin_invoice_path(@invoice1)
   end
 
   it 'displays information related to invoice' do
+
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice1.status)
     expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
@@ -51,15 +52,27 @@ describe 'admin invoices show page' do
   end
 
   it 'has a select option for invoice status' do
-
+    # save_and_open_page
     within("#invoice-#{@invoice1.id}-status") do
-      select 'completed', from: :invoice_status
+      select 'completed', from: 'status'
       click_button('Update Invoice Status')
     end
 
     @invoice1.reload
 
-    expect(current_path).to eq(admin_invoices_path(@invoice1.id))
-  end
+    expect(current_path).to eq(admin_invoice_path(@invoice1))
 
+    within("#invoice-#{@invoice1.id}-status") do
+      expect(find(:css, 'select#status').value ).to eq('completed')
+    end
+
+    within("#invoice-#{@invoice1.id}-status") do
+      select 'cancelled', from: 'status'
+      click_button('Update Invoice Status')
+    end
+
+    within("#invoice-#{@invoice1.id}-status") do
+      expect(find(:css, 'select#status').value ).to eq('cancelled')
+    end
+  end
 end
