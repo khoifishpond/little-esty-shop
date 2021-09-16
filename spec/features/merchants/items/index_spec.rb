@@ -153,11 +153,11 @@ RSpec.describe 'merchants items index page' do
     end
 
     it 'has links to all 5 popular items' do
-      expect(page).to have_link(@item7.name)
-      expect(page).to have_link(@item6.name)
-      expect(page).to have_link(@item5.name)
-      expect(page).to have_link(@item4.name)
-      expect(page).to have_link(@item3.name)
+      expect(page).to have_link("#{@item7.name}")
+      expect(page).to have_link("#{@item6.name}")
+      expect(page).to have_link("#{@item5.name}")
+      expect(page).to have_link("#{@item4.name}")
+      expect(page).to have_link("#{@item3.name}")
 
       within("#popular-#{@item4.id}") do
         click_link "#{@item4.name}"

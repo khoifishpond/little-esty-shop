@@ -25,8 +25,8 @@ RSpec.describe 'Merchant Invoices Show page' do
     @invoice6 = create(:invoice, customer: @cust6)
     @invoice7 = create(:invoice, customer: @cust7)
     @invoice8 = create(:invoice, customer: @cust7)
-    InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 15, unit_price: 1000)
-    InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 11, unit_price: 4000)
+    @ii1 = InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 15, unit_price: 1000)
+    @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 11, unit_price: 4000)
     InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item1, invoice: @invoice2)
     InvoiceItem.create(item: @item1, invoice: @invoice3)
@@ -83,24 +83,27 @@ RSpec.describe 'Merchant Invoices Show page' do
 
   it 'has a select box for invoice status' do
     within("#table-#{@item1.id}") do
-      select 'shipped', from: 'status'
+      select 'shipped', from: 'ii_status'
       click_button('Update Item Status')
     end
 
-    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
-
-    within("#table-#{@item1.id}") do
-      expect(page).to have_content('shipped')
-    end
-
-    within("#table-#{@item2.id}") do
-      select 'pending', from: 'status'
-    end
+    @ii1.reload
 
     expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+    expect(@ii1.status).to eq('shipped')
 
     within("#table-#{@item2.id}") do
-      expect(page).to have_content('pending')
+      select 'pending', from: 'ii_status'
+      click_button('Update Item Status')
     end
+
+    @ii2.reload
+
+    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+    expect(@ii2.status).to eq('pending')
+    expect( find(:css, 'select#ii_status').value ).to eq('pending')
+    # within("#table-#{@item2.id}") do
+    #   expect(page).to have_content('pending')
+    # end
   end
 end
