@@ -9,6 +9,6 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.permit(:status, :created_at, :updated_at)
+    params.require(:invoice).permit(:status, :created_at, :updated_at)
   end
 end
