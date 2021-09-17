@@ -23,8 +23,8 @@ class MerchantsController < ApplicationController
     if merchant.save
       redirect_to admin_merchants_path
     else
-      flash[:notice] = "Merchant not created. Missing information"
       redirect_to new_merchant_path
+      flash[:notice] = "Merchant not created. Missing information"
     end
   end
 
