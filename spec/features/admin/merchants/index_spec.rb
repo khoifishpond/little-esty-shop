@@ -107,4 +107,11 @@ RSpec.describe 'Admin Merchant Index page' do
     expect(@merch4.name).to appear_before(@merch3.name)
     expect(@merch3.name).to appear_before(@merch2.name)
   end
+
+  it 'shows the best day for each of the top 5 merchants' do
+    within("#top_five-#{@merch6.id}") do
+      expect(page).to have(@merch6.name)
+      expect(page).to have(@merch6.best_day)
+    end
+  end
 end
