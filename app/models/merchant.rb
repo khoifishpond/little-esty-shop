@@ -40,11 +40,8 @@ class Merchant < ApplicationRecord
   end
 
   def all_invoices
-    Invoice.select("invoices.*")
-          .joins(:items)
-          .where("items.merchant_id = ?", id)
-          .group(:id)
-          .order(:id)
+    Invoice.joins(:items)
+           .where("items.merchant_id = ?", id)
   end
 
   def self.top_five

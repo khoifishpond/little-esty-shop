@@ -176,5 +176,54 @@ RSpec.describe Merchant, type: :model do
 
       expect(Merchant.disabled).to eq([@merch1, @merch2])
     end
+
+    describe 'merchant top five and best day' do
+      before :each do
+        @merch1 = create(:merchant)
+        @merch2 = create(:merchant, status: 0)
+        @merch3 = create(:merchant, status: 0)
+        @merch4 = create(:merchant, status: 0)
+        @merch5 = create(:merchant)
+        @merch6 = create(:merchant)
+        @cust1 = create(:customer)
+        @cust2 = create(:customer)
+        @cust3 = create(:customer)
+        @cust4 = create(:customer)
+        @cust5 = create(:customer)
+        @cust6 = create(:customer)
+        @item1 = create(:item, merchant: @merch1)
+        @item2 = create(:item, merchant: @merch2)
+        @item3 = create(:item, merchant: @merch3)
+        @item4 = create(:item, merchant: @merch4)
+        @item5 = create(:item, merchant: @merch5)
+        @item6 = create(:item, merchant: @merch6)
+        @invoice1 = create(:invoice, customer: @cust1)
+        @invoice2 = create(:invoice, customer: @cust2)
+        @invoice3 = create(:invoice, customer: @cust3)
+        @invoice4 = create(:invoice, customer: @cust4)
+        @invoice5 = create(:invoice, customer: @cust5)
+        @invoice6 = create(:invoice, customer: @cust6)
+        InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, unit_price: 1000, quantity: 1)
+        InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1, unit_price: 2000, quantity: 1)
+        InvoiceItem.create(item: @item3, invoice: @invoice3, status: 1, unit_price: 3000, quantity: 1)
+        InvoiceItem.create(item: @item4, invoice: @invoice4, unit_price: 4000, quantity: 1)
+        InvoiceItem.create(item: @item5, invoice: @invoice5, unit_price: 5000, quantity: 1)
+        InvoiceItem.create(item: @item6, invoice: @invoice6, unit_price: 6000, quantity: 1)
+        create(:transaction, invoice: @invoice1, result: 'success')
+        create(:transaction, invoice: @invoice2, result: 'success')
+        create(:transaction, invoice: @invoice3, result: 'success')
+        create(:transaction, invoice: @invoice4, result: 'success')
+        create(:transaction, invoice: @invoice5, result: 'success')
+        create(:transaction, invoice: @invoice6, result: 'success')
+      end
+
+      it 'finds the top five merchants' do
+        expect(Merchant.top_five).to eq([@merch6, @merch5, @merch4, @merch3, @merch2])
+      end
+
+      it 'finds a merchants best day and formats the date' do
+        expect(@merch1.best_day.created_at_formatted).to eq(@invoice1.created_at_formatted)
+      end
+    end
   end
 end
