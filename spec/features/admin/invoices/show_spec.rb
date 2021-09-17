@@ -53,7 +53,7 @@ describe 'admin invoices show page' do
 
   it 'has a select option for invoice status' do
     within("#invoice-#{@invoice1.id}-status") do
-      select 'completed', from: 'status'
+      select 'completed', from: 'invoice_status'
       click_button('Update Invoice Status')
     end
 
@@ -62,16 +62,16 @@ describe 'admin invoices show page' do
     expect(current_path).to eq(admin_invoice_path(@invoice1))
 
     within("#invoice-#{@invoice1.id}-status") do
-      expect(find(:css, 'select#status').value ).to eq('completed')
+      expect(find(:css, 'select#invoice_status').value ).to eq('completed')
     end
 
     within("#invoice-#{@invoice1.id}-status") do
-      select 'cancelled', from: 'status'
+      select 'cancelled', from: 'invoice_status'
       click_button('Update Invoice Status')
     end
 
     within("#invoice-#{@invoice1.id}-status") do
-      expect(find(:css, 'select#status').value ).to eq('cancelled')
+      expect(find(:css, 'select#invoice_status').value ).to eq('cancelled')
     end
   end
 end
