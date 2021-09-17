@@ -13,6 +13,10 @@ class MerchantsController < ApplicationController
     redirect_to admin_merchants_path
   end
 
+  def new
+    @merchant = Merchant.new
+  end
+
 private
   def merchant_params
     params.permit(:status)
