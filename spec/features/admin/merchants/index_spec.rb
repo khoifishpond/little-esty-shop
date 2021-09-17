@@ -109,9 +109,30 @@ RSpec.describe 'Admin Merchant Index page' do
   end
 
   it 'shows the best day for each of the top 5 merchants' do
+    save_and_open_page
     within("#top_five-#{@merch6.id}") do
-      expect(page).to have(@merch6.name)
-      expect(page).to have(@merch6.best_day)
+      expect(page).to have_content(@merch6.name)
+      expect(page).to have_content(@invoice6.created_at_formatted)
+    end
+
+    within("#top_five-#{@merch5.id}") do
+      expect(page).to have_content(@merch5.name)
+      expect(page).to have_content(@invoice5.created_at_formatted)
+    end
+
+    within("#top_five-#{@merch4.id}") do
+      expect(page).to have_content(@merch4.name)
+      expect(page).to have_content(@invoice4.created_at_formatted)
+    end
+
+    within("#top_five-#{@merch3.id}") do
+      expect(page).to have_content(@merch3.name)
+      expect(page).to have_content(@invoice3.created_at_formatted)
+    end
+
+    within("#top_five-#{@merch2.id}") do
+      expect(page).to have_content(@merch2.name)
+      expect(page).to have_content(@invoice2.created_at_formatted)
     end
   end
 end

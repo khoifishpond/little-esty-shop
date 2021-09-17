@@ -6,7 +6,7 @@
   <div id="top_five-<%= merchant.id %>">
     <li><%= merchant.name %></li>
     <p>Revenue: <%= number_to_currency(merchant.revenue.fdiv(100)) %></p>
-    <p>Top selling date for <%= merchant.name  %> was <%= merchant.best_day %> </p>
+    <p>Top selling date for <%= merchant.name  %> was <%= merchant.best_day.created_at_formatted %> </p>
   </div>
   <% end %>
 </ol>
