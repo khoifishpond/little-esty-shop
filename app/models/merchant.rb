@@ -46,4 +46,27 @@ class Merchant < ApplicationRecord
           .group(:id)
           .order(:id)
   end
+
+  def self.top_five
+            joins(items: [{invoice_items: {invoice: :transactions}}])
+            .select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+            .where("transactions.result = ?", 0)
+            .group(:id)
+            .order(revenue: :desc)
+            .limit(5)
+  end
+
+  def best_day
+    Merchant.joins(items: {invoice_items: :invoice})
+        .select("merchants.*, invoices.created_at AS date_created, SUM(invoice_items.quantity * invoice_items.unit_price) AS sales")
+        .where("merchants.id = ?", id)
+        .group(:id, :date_created)
+        .order(sales: :desc, date_created: :desc)
+        .limit(1)
+        .first
+  end
+
+  def created_at_formatted
+    date_created.strftime("%A, %B %d, %Y")
+  end
 end
