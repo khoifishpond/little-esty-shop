@@ -42,4 +42,23 @@ RSpec.describe 'Admin Merchant Index page' do
       expect(@merch1.status).to eq("disabled")
     end
   end
+
+  it 'has an enabled only section' do
+    within("#enabled") do
+      within("#item-#{@item2.id}") do
+        expect(@item2.enable).to eq("enabled")
+        expect(page).to have_content("#{@item2.name}")
+        click_on "Disable"
+      end
+    end
+  end
+
+  it 'has an disabled only section' do
+    within("#disabled") do
+      within("#item-#{@item3.id}") do
+        expect(@item3.enable).to eq("disabled")
+        expect(page).to have_content("#{@item3.name}")
+      end
+    end
+  end
 end
