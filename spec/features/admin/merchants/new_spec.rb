@@ -18,4 +18,12 @@ RSpec.describe 'Admin Merchant Index page' do
     expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content("Antonio Gibson Incorporated")
   end
+
+  it 'shows an error when a field is left blank' do
+    fill_in "Name", with: " "
+    click_button "Create Merchant"
+
+    expect(current_path).to eq(new_merchant_path)
+    expect(page).to have_content("Merchant not created. Missing information")
+  end
 end
