@@ -1,3 +1,25 @@
-<% @merchants.each do |merchant| %>
-  <p><%= link_to merchant.name, admin_merchant_path(id: merchant.id) %></p>
-<% end %>
+<h1>Admin Merchants</h1>
+
+<h3>Enabled Merchants</h3>
+<section id="enabled">
+  <ul>
+    <% @merchants.enabled.each do |merchant| %>
+      <div id="merchant-<%= merchant.id %>">
+        <li><p><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+        <%= button_to "Disable", merchant_path(merchant), method: :patch, params:{status: "disabled"} %>
+      </div>
+    <% end %>
+  </ul>
+</section>
+
+<h3>Disabled Merchants</h3>
+<section id="disabled">
+  <ul>
+    <% @merchants.disabled.each do |merchant| %>
+      <div id="merchant-<%= merchant.id %>">
+        <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+        <%= button_to "Enable", merchant_path(merchant), method: :patch, params:{status: "enabled"} %>
+      </div>
+    <% end %>
+  </ul>
+</section>
