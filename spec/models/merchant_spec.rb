@@ -158,5 +158,23 @@ RSpec.describe Merchant, type: :model do
 
       expect(@merch1.all_invoices).to eq([@invoice1, @invoice2, @invoice3])
     end
+
+    it 'finds enabled merchants' do
+      @merch1 = create(:merchant)
+      @merch2 = create(:merchant)
+      @merch3 = create(:merchant, status: 0)
+      @merch4 = create(:merchant, status: 0)
+
+      expect(Merchant.enabled).to eq([@merch3, @merch4])
+    end
+
+    it 'finds enabled merchants' do
+      @merch1 = create(:merchant)
+      @merch2 = create(:merchant)
+      @merch3 = create(:merchant, status: 0)
+      @merch4 = create(:merchant, status: 0)
+
+      expect(Merchant.disabled).to eq([@merch1, @merch2])
+    end
   end
 end
