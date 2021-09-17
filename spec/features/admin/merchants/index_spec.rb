@@ -109,7 +109,6 @@ RSpec.describe 'Admin Merchant Index page' do
   end
 
   it 'shows the best day for each of the top 5 merchants' do
-    save_and_open_page
     within("#top_five-#{@merch6.id}") do
       expect(page).to have_content(@merch6.name)
       expect(page).to have_content(@invoice6.created_at_formatted)
