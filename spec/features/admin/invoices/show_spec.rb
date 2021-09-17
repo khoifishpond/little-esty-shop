@@ -53,7 +53,7 @@ describe 'admin invoices show page' do
 
   it 'has a select option for invoice status' do
     within("#invoice-#{@invoice1.id}-status") do
-      select 'completed', from: 'invoice_status'
+      select 'completed', from: :invoice_status
       click_button('Update Invoice Status')
     end
 
@@ -66,7 +66,7 @@ describe 'admin invoices show page' do
     end
 
     within("#invoice-#{@invoice1.id}-status") do
-      select 'cancelled', from: 'invoice_status'
+      select 'cancelled', from: :invoice_status
       click_button('Update Invoice Status')
     end
 
