@@ -1,5 +1,8 @@
 <h1>Invoice #<%= @invoice.id %></h1>
 
+<%= render 'shared/admin_nav' %><br>
+<br>
+
 <div id="invoice-<%= @invoice.id %>-status">
   <%= form_with model: @invoice, local: true do |f| %>
     <%= f.label 'Status: ' %>

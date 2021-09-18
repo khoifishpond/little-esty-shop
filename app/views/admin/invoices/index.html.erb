@@ -1,5 +1,7 @@
 <h1>Admin Invoices</h1>
 
+<%= render 'shared/admin_nav' %><br>
+<br>
 <% @invoices.each do |invoice| %>
   <ul>
     <div id="invoice-<%= invoice.id %>">
