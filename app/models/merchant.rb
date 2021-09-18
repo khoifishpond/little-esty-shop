@@ -1,6 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
-  validates :name, presence: true, allow_blank: false
+  validates :name, presence: true
 
   enum status: {
     enabled: 0,
@@ -15,8 +15,17 @@ class Merchant < ApplicationRecord
     where(status: 1)
   end
 
+  def self.top_five
+    joins(items: {invoice_items: {invoice: :transactions}})
+    .select("merchants.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+    .merge(Transaction.purchase)
+    .group(:id)
+    .order(revenue: :desc)
+    .limit(5)
+  end
+
   def favorite_customers
-    Customer.select("customers.*, COUNT(transactions.result) as purchases")
+    Customer.select("customers.*, COUNT(transactions.result) AS purchases")
       .joins(invoices: [:items, :transactions])
       .where('items.merchant_id = ?', id)
       .merge(Transaction.purchase)
@@ -27,42 +36,33 @@ class Merchant < ApplicationRecord
 
   def items_ready_to_ship
     items.joins(:invoice_items)
-        .where.not('invoice_items.status = ?', 2)
+      .where.not('invoice_items.status = ?', 2)
   end
 
   def top_five_items
     items.joins(invoice_items: {invoice: :transactions})
-    .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
-    .where("transactions.result = ?", 0)
-    .group(:id)
-    .order(revenue: :desc)
-    .limit(5)
+      .select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+      .merge(Transaction.purchase)
+      .group(:id)
+      .order(revenue: :desc)
+      .limit(5)
   end
 
   def all_invoices
     Invoice.joins(:items)
-           .where("items.merchant_id = ?", id)
-           .group(:id)
-           .order(:id)
-  end
-
-  def self.top_five
-            joins(items: [{invoice_items: {invoice: :transactions}}])
-            .select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
-            .where("transactions.result = ?", 0)
-            .group(:id)
-            .order(revenue: :desc)
-            .limit(5)
+      .where("items.merchant_id = ?", id)
+      .group(:id)
+      .order(:id)
   end
 
   def best_day
     Merchant.joins(items: {invoice_items: :invoice})
-        .select("merchants.*, invoices.created_at AS date_created, SUM(invoice_items.quantity * invoice_items.unit_price) AS sales")
-        .where("merchants.id = ?", id)
-        .group(:id, :date_created)
-        .order(sales: :desc, date_created: :desc)
-        .limit(1)
-        .first
+      .select("merchants.*, invoices.created_at AS date_created, SUM(invoice_items.quantity * invoice_items.unit_price) AS sales")
+      .where("merchants.id = ?", id)
+      .group(:id, :date_created)
+      .order(sales: :desc, date_created: :desc)
+      .limit(1)
+      .first
   end
 
   def created_at_formatted
