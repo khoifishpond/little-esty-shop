@@ -51,7 +51,7 @@ RSpec.describe 'Merchant Invoices Show page' do
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
-    visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
+    visit merchant_invoice_path(@merch1, @invoice1)
   end
 
   it 'shows information for specific id' do
@@ -90,7 +90,7 @@ RSpec.describe 'Merchant Invoices Show page' do
 
     @ii1.reload
 
-    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+    expect(current_path).to eq(merchant_invoice_path(@merch1, @invoice1))
     expect(@ii1.status).to eq('packaged')
 
     within("#table-#{@ii1.id}") do
@@ -101,10 +101,11 @@ RSpec.describe 'Merchant Invoices Show page' do
       select 'pending', from: 'invoice_item_status'
       click_button('Update Item Status')
     end
+    expect(page).to have_content("Invoice Item has updated sucessfully")
 
     @ii2.reload
 
-    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+    expect(current_path).to eq(merchant_invoice_path(@merch1, @invoice1))
     expect(@ii2.status).to eq('pending')
 
     within("#table-#{@ii2.id}") do

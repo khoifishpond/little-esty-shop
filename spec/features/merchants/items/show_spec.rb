@@ -11,7 +11,7 @@ RSpec.describe 'merchants items show page' do
   end
 
   it "shows items attributes" do
-    visit "/merchants/#{@merchant.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant, @item1)
 
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item1.description)
@@ -19,13 +19,13 @@ RSpec.describe 'merchants items show page' do
   end
 
   it "shows items attributes" do
-    visit "/merchants/#{@merchant.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant, @item1)
 
-    expect(page).to have_button("Update Item")
+    expect(page).to have_link("Update Item")
   end
 
   it "redirects you to edit page after clicking update item" do
-    visit "/merchants/#{@merchant.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant, @item1)
 
     click_on "Update Item"
 

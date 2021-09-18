@@ -12,15 +12,15 @@ class MerchantItemsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:id])
-    @item.update(item_params)
+    merchant = Merchant.find(params[:merchant_id])
+    item = Item.find(params[:id])
+    item.update(item_params)
 
     if params[:enable]
-      redirect_to "/merchants/#{@merchant.id}/items/"
+      redirect_to merchant_items_path(merchant)
     elsif
       flash[:notice] = "Item has been updated succesfully"
-      redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
+      redirect_to merchant_item_path(merchant, item)
     end
   end
 
@@ -29,19 +29,19 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
-    @merchant = Merchant.find(params[:merchant_id])
-    item = @merchant.items.create(item_params)
+    merchant = Merchant.find(params[:merchant_id])
+    item = merchant.items.create(item_params)
 
     if item.save
-      redirect_to "/merchants/#{@merchant.id}/items"
+      redirect_to merchant_items_path(merchant)
     else
       flash[:notice] = "Item not created. Information missing"
-      redirect_to "/merchants/#{@merchant.id}/items/new"
+      redirect_to new_merchant_item_path(merchant)
     end
   end
 
-
   private
+  
   def item_params
     params.permit(:name, :description, :unit_price, :enable)
   end

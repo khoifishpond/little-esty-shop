@@ -1,7 +1,10 @@
+<%= render 'shared/admin_nav' %><br>
+<br>
+
 <h1> Edit <%= @merchant.name %></h1>
 
 <%= form_with url: admin_merchant_path(id: @merchant.id), method: :patch, local: true do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name, value: @merchant.name %><br>
-  <%= f.submit "Submit" %>
+  <%= f.text_field :name, value: @merchant.name %>
+  <%= f.submit "Update Merchant" %>
 <% end %>

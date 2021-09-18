@@ -1,5 +1,6 @@
 <h1><%= @merchant.name %></h1>
 
+<%= link_to "Create new item", new_merchant_item_path%>
 
   <h3>Most Popular Items</h3>
   <ul>
@@ -36,5 +37,3 @@
     <% end %>
   </ul>
 </section>
-
-<%= link_to "Create new item", new_merchant_item_path%>

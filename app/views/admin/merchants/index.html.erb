@@ -1,12 +1,15 @@
 <h1>Admin Merchants</h1>
 
+<%= render 'shared/admin_nav' %><br>
+<br>
+<%= link_to "Create New Merchant", new_merchant_path %>
+
 <h3>Top Five Merchants</h3>
 <ol>
   <% @merchants.top_five.each do |merchant| %>
   <div id="top_five-<%= merchant.id %>">
-    <li><%= merchant.name %></li>
-    <p>Revenue: <%= number_to_currency(merchant.revenue.fdiv(100)) %></p>
-    <p>Top selling date for <%= merchant.name  %> was <%= merchant.best_day.created_at_formatted %> </p>
+    <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.revenue.fdiv(100)) %> in revenue</li>
+    <p>Top selling date for <%= merchant.name  %> was <%= merchant.best_day.created_at_formatted %></p>
   </div>
   <% end %>
 </ol>
@@ -16,7 +19,7 @@
   <ul>
     <% @merchants.enabled.each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
-        <li><p><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+        <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
         <%= button_to "Disable", merchant_path(merchant), method: :patch, params:{status: "disabled"} %>
       </div>
     <% end %>
@@ -34,5 +37,3 @@
     <% end %>
   </ul>
 </section>
-
-<%= link_to "Create New Merchant", new_merchant_path %>

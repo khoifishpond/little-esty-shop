@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  def dashboard
+  def show
     @merchant = Merchant.find(params[:merchant_id])
   end
 
@@ -8,8 +8,9 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find(params[:id])
-    @merchant.update(merchant_params)
+    merchant = Merchant.find(params[:id])
+    merchant.update(merchant_params)
+
     redirect_to admin_merchants_path
   end
 
@@ -28,7 +29,8 @@ class MerchantsController < ApplicationController
     end
   end
 
-private
+  private
+
   def merchant_params
     params.permit(:status)
   end

@@ -112,6 +112,4 @@ RSpec.describe Customer, type: :model do
       expect(@cust1.created_at_formatted).to eq("Tuesday, March 27, 2012")
     end
   end
-
-
 end

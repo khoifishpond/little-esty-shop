@@ -95,7 +95,7 @@ RSpec.describe 'Admin dashboard' do
     create(:transaction, invoice: @invoice19, result: 'success')
     create(:transaction, invoice: @invoice19, result: 'success')
 
-    visit '/admin'
+    visit admin_path
   end
 
   it 'shows that you are on the admin dashboard' do
@@ -115,13 +115,13 @@ RSpec.describe 'Admin dashboard' do
   it 'takes you to the admin merchants index when you click the link' do
     click_link "Admin Merchants Index"
 
-    expect(current_path).to eq("/admin/merchants")
+    expect(current_path).to eq(admin_merchants_path)
   end
 
   it 'takes you to the admin invoices index when you click the link' do
     click_link "Admin Invoices Index"
 
-    expect(current_path).to eq("/admin/invoices")
+    expect(current_path).to eq(admin_invoices_path)
   end
 
   it 'has the names of the top five customers' do
