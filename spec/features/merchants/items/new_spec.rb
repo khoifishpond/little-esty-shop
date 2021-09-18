@@ -20,7 +20,7 @@ RSpec.describe 'merchant items new page' do
     fill_in('Name', with: 'Keyboard')
     fill_in('Description', with: 'RGB')
     fill_in('Unit price', with: 4000)
-    click_on "Submit"
+    click_on "Create Item"
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items")
 
@@ -33,7 +33,7 @@ RSpec.describe 'merchant items new page' do
     visit new_merchant_item_path(@merchant)
 
     fill_in('Name', with: 'Keyboard')
-    click_on "Submit"
+    click_on "Create Item"
 
     expect(current_path).to eq(new_merchant_item_path(@merchant))
     expect(page).to have_content("Item not created. Information missing")
