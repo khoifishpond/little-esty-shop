@@ -38,6 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'faker'
 gem 'factory_bot_rails'
+gem 'faraday'
 
 group :development, :test do
   gem 'capybara'
