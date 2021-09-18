@@ -100,6 +100,7 @@ RSpec.describe 'Merchant Invoices Show page' do
       select 'pending', from: 'status'
       click_button('Update Item Status')
     end
+    expect(page).to have_content("Invoice Item has updated sucessfully")
 
     @ii2.reload
 
