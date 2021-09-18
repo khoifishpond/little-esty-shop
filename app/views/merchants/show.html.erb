@@ -1,0 +1,27 @@
+<h1><%= @merchant.name %></h1>
+
+<%= link_to "My Items", merchant_items_path %>
+<%= link_to "My Invoices", merchant_invoices_path %>
+
+<h2>Favorite Customers</h2>
+<ul>
+  <% @merchant.favorite_customers.each do |customer| %>
+    <section id="customer-<%= customer.id %>">
+      <li><%= customer.first_name %> <%= customer.last_name %>: <%= customer.purchases %> purchases</li>
+    </section>
+  <% end %>
+</ul>
+
+<h2>Items Ready to Ship</h2>
+<ul>
+  <% @merchant.items_ready_to_ship.each do |item| %>
+    <section id="item-<%= item.id %>">
+      <li><%= item.name %></li>
+        <ul>
+          <% item.ordered_invoices.each do |invoice| %>
+            <li>Invoice #<%= link_to invoice.id, merchant_invoice_path(id: invoice.id) %> - <%= invoice.created_at_formatted %></li>
+          <% end %>
+        </ul>
+    </section>
+  <% end %>
+</ul>
