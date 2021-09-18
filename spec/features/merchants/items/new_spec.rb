@@ -6,7 +6,7 @@ RSpec.describe 'merchant items new page' do
   end
 
   it 'has a form' do
-    visit "/merchants/#{@merchant.id}/items/new"
+    visit new_merchant_item_path(@merchant)
 
     expect(page).to have_content("Add New Item to #{@merchant.name}")
     expect(page).to have_field("Name")
@@ -15,7 +15,7 @@ RSpec.describe 'merchant items new page' do
   end
 
   it 'creates a new item' do
-    visit "/merchants/#{@merchant.id}/items/new"
+    visit new_merchant_item_path(@merchant)
 
     fill_in('Name', with: 'Keyboard')
     fill_in('Description', with: 'RGB')
@@ -30,12 +30,12 @@ RSpec.describe 'merchant items new page' do
   end
 
   it 'returns an error when a field is invalid' do
-    visit "/merchants/#{@merchant.id}/items/new"
+    visit new_merchant_item_path(@merchant)
 
     fill_in('Name', with: 'Keyboard')
     click_on "Submit"
 
-    expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+    expect(current_path).to eq(new_merchant_item_path(@merchant))
     expect(page).to have_content("Item not created. Information missing")
   end
 end

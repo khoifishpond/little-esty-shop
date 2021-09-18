@@ -53,7 +53,7 @@ describe 'merchant dashboard page' do
     create(:transaction, invoice: @invoice8, result: 'success')
     create(:transaction, invoice: @invoice8, result: 'success')
     create(:transaction, invoice: @invoice8, result: 'success')
-    visit "/merchants/#{@merch1.id}/dashboard"
+    visit merchant_dashboard_path(@merch1)
   end
 
   it 'shows the name of the merchant' do
@@ -63,13 +63,13 @@ describe 'merchant dashboard page' do
   it 'has link to merchant items index' do
     click_link("My Items")
 
-    expect(current_path).to eq("/merchants/#{@merch1.id}/items")
+    expect(current_path).to eq(merchant_items_path(@merch1))
 
-    visit "/merchants/#{@merch1.id}/dashboard"
+    visit merchant_dashboard_path(@merch1)
 
     click_link("My Invoices")
 
-    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices")
+    expect(current_path).to eq(merchant_invoices_path(@merch1))
   end
 
   it 'shows names of top 5 customers and their successful transactions' do
@@ -137,5 +137,3 @@ describe 'merchant dashboard page' do
     end
   end
 end
-
-# save_and_open_page

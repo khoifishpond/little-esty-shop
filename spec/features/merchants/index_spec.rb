@@ -4,9 +4,9 @@ RSpec.describe 'merchant index' do
   it 'shows merchant ids' do
     merch1 = create(:merchant)
     merch2 = create(:merchant)
-    visit "/merchants"
+    visit merchants_path
     
-    expect(page).to have_content(merch1.id)
-    expect(page).to have_content(merch2.id)
+    expect(page).to have_content(merch1.name)
+    expect(page).to have_content(merch2.name)
   end
 end

@@ -1,3 +1,7 @@
+<h1>All Merchants</h1>
+
 <% @merchants.each do |merchant| %>
-  <%= merchant.id %>
+  <ul>
+    <li><%= link_to merchant.name, merchant_dashboard_path(merchant_id: merchant.id) %></li>
+  </ul>
 <% end %>
