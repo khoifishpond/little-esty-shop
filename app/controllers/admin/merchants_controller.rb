@@ -1,24 +1,16 @@
 class Admin::MerchantsController < ApplicationController
+  before_action :merchant_by_id, only: [:show, :edit, :update]
+
   def index
     @merchants = Merchant.all
   end
 
-  def show
-    @merchant = Merchant.find(params[:id])
-  end
-
-  def edit
-    @merchant = Merchant.find(params[:id])
-  end
-
   def update
-    merchant = Merchant.find(params[:id])
-    
-    if merchant.update(merchant_params)
-      redirect_to admin_merchant_path(merchant)
+    if @merchant.update(merchant_params)
+      redirect_to admin_merchant_path(@merchant)
       flash[:notice] = "Merchant updated successfully"
     elsif
-      redirect_to edit_admin_merchant_path(merchant)
+      redirect_to edit_admin_merchant_path(@merchant)
       flash[:notice] = "Name cannot be blank"
     end
   end
@@ -27,5 +19,9 @@ class Admin::MerchantsController < ApplicationController
 
   def merchant_params
     params.permit(:name)
+  end
+
+  def merchant_by_id
+    @merchant = Merchant.find(params[:id])
   end
 end
