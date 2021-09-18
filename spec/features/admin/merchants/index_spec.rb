@@ -32,12 +32,18 @@ RSpec.describe 'Admin Merchant Index page' do
     InvoiceItem.create(item: @item4, invoice: @invoice4, unit_price: 4000, quantity: 1)
     InvoiceItem.create(item: @item5, invoice: @invoice5, unit_price: 5000, quantity: 1)
     InvoiceItem.create(item: @item6, invoice: @invoice6, unit_price: 6000, quantity: 1)
-    create(:transaction, invoice: @invoice1, result: 'success')
-    create(:transaction, invoice: @invoice2, result: 'success')
-    create(:transaction, invoice: @invoice3, result: 'success')
-    create(:transaction, invoice: @invoice4, result: 'success')
-    create(:transaction, invoice: @invoice5, result: 'success')
-    create(:transaction, invoice: @invoice6, result: 'success')
+    create(:transaction, invoice: @invoice1, result: 0)
+    create(:transaction, invoice: @invoice2, result: 0)
+    create(:transaction, invoice: @invoice3, result: 0)
+    create(:transaction, invoice: @invoice4, result: 0)
+    create(:transaction, invoice: @invoice5, result: 0)
+    create(:transaction, invoice: @invoice6, result: 0)
+    create(:transaction, invoice: @invoice1, result: 0)
+    create(:transaction, invoice: @invoice2, result: 0)
+    create(:transaction, invoice: @invoice3, result: 0)
+    create(:transaction, invoice: @invoice4, result: 0)
+    create(:transaction, invoice: @invoice5, result: 0)
+    create(:transaction, invoice: @invoice6, result: 0)
 
     visit admin_merchants_path
   end
@@ -48,12 +54,17 @@ RSpec.describe 'Admin Merchant Index page' do
   end
 
   it 'has links to merchants admin show page' do
-    click_link("#{@merch1.name}")
+    within("#disabled") do
+      click_link("#{@merch1.name}")
+    end
 
     expect(current_path).to eq(admin_merchant_path(@merch1))
 
     visit admin_merchants_path
-    click_link("#{@merch2.name}")
+
+    within("#enabled") do
+      click_link("#{@merch2.name}")
+    end
 
     expect(current_path).to eq(admin_merchant_path(@merch2))
   end
@@ -66,7 +77,9 @@ RSpec.describe 'Admin Merchant Index page' do
         expect(current_path).to eq(admin_merchants_path)
       end
     end
+
     @merch1.reload
+
     expect(@merch1.status).to eq("enabled")
   end
 
@@ -86,7 +99,7 @@ RSpec.describe 'Admin Merchant Index page' do
       within("#merchant-#{@merch1.id}") do
         expect(@merch1.status).to eq("disabled")
         expect(page).to have_content("#{@merch1.name}")
-          expect(page).to_not have_content("#{@merch2.name}")
+        expect(page).to_not have_content("#{@merch2.name}")
         click_on "Enable"
       end
     end
