@@ -42,6 +42,8 @@ class Merchant < ApplicationRecord
   def all_invoices
     Invoice.joins(:items)
            .where("items.merchant_id = ?", id)
+           .group(:id)
+           .order(:id)
   end
 
   def self.top_five

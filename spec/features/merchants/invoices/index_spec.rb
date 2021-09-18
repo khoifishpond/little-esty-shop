@@ -52,10 +52,12 @@ RSpec.describe 'Merchant invoices index page' do
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
+
+    visit merchant_invoices_path(@merch1)
   end
 
   it 'shows all the invoices that include one of the merchants items' do
-    visit "/merchants/#{@merch1.id}/invoices"
+    
 
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice2.id)
@@ -65,11 +67,10 @@ RSpec.describe 'Merchant invoices index page' do
   end
 
   it 'each id links to a merchant invoice show page' do
-    visit "/merchants/#{@merch1.id}/invoices"
 
     click_link "#{@invoice3.id}"
 
-    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice3.id}")
+    expect(current_path).to eq(merchant_invoice_path(@merch1, @invoice3))
   end
 
 end

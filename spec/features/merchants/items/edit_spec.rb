@@ -11,7 +11,7 @@ RSpec.describe 'merchants items edit page' do
   end
 
   it "displays a form" do
-    visit "/merchants/#{@merchant.id}/items/#{@item1.id}/edit"
+    visit edit_merchant_item_path(@merchant, @item1)
 
     expect(page).to have_content("Edit #{@item1.name}")
     expect(page).to have_content("Name")
@@ -23,17 +23,17 @@ RSpec.describe 'merchants items edit page' do
   end
 
   it "allows us to enter new information and click submit" do
-    visit "/merchants/#{@merchant.id}/items/#{@item1.id}/edit"
+    visit edit_merchant_item_path(@merchant, @item1)
 
     fill_in('Name', with: 'Keyboard')
     fill_in('Description', with: 'RGB')
     fill_in('Unit price', with: 4000)
     click_on "Submit"
 
-    expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item1.id}")
+    expect(current_path).to eq(merchant_item_path(@merchant, @item1))
     expect(page).to have_content("Keyboard")
     expect(page).to have_content("RGB")
-    expect(page).to have_content(4000)
+    expect(page).to have_content("$40.00")
     expect(page).to_not have_content("Lamp")
     expect(page).to_not have_content("Sheds light")
     expect(page).to_not have_content(5)

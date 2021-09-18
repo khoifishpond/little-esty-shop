@@ -50,12 +50,12 @@ RSpec.describe 'Admin Merchant Index page' do
   it 'has links to merchants admin show page' do
     click_link("#{@merch1.name}")
 
-    expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
+    expect(current_path).to eq(admin_merchant_path(@merch1))
 
-    visit "/admin/merchants"
+    visit admin_merchants_path
     click_link("#{@merch2.name}")
 
-    expect(current_path).to eq("/admin/merchants/#{@merch2.id}")
+    expect(current_path).to eq(admin_merchant_path(@merch2))
   end
 
   it 'has a button to enable/disable merchant' do

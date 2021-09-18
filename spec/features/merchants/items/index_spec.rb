@@ -9,7 +9,7 @@ RSpec.describe 'merchants items index page' do
       @item2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10, enable: 0)
       @item3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50)
       @item4 = @merchant2.items.create!(name: "Table", description: "Eat on it", unit_price: 100, enable: 0)
-      visit "/merchants/#{@merchant.id}/items"
+      visit merchant_items_path(@merchant)
     end
 
     it 'displays merchant item names' do
@@ -21,7 +21,7 @@ RSpec.describe 'merchants items index page' do
     it 'has a link to items show page' do
       click_on "#{@item1.name}"
 
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item1.id}")
+      expect(current_path).to eq(merchant_item_path(@merchant, @item1))
     end
 
     it 'has a button for enable/disable item' do
@@ -45,7 +45,7 @@ RSpec.describe 'merchants items index page' do
 
       @item2.reload
 
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items/")
+      expect(current_path).to eq(merchant_items_path(@merchant))
       expect(@item2.enable).to eq("disabled")
     end
 
@@ -71,7 +71,7 @@ RSpec.describe 'merchants items index page' do
     it 'has a link to create a new item' do
       expect(page).to have_link("Create new item")
       click_link "Create new item"
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+      expect(current_path).to eq(new_merchant_item_path(@merchant))
     end
   end
 
@@ -140,7 +140,7 @@ RSpec.describe 'merchants items index page' do
       create(:transaction, invoice: @invoice12, result: 'success')
       create(:transaction, invoice: @invoice13, result: 'success')
       create(:transaction, invoice: @invoice14, result: 'success')
-      visit "/merchants/#{@merch1.id}/items"
+      visit merchant_items_path(@merch1)
     end
 
     # add appear_before
@@ -163,7 +163,7 @@ RSpec.describe 'merchants items index page' do
         click_link "#{@item4.name}"
       end
 
-      expect(current_path).to eq("/merchants/#{@merch1.id}/items/#{@item4.id}")
+      expect(current_path).to eq(merchant_item_path(@merch1, @item4))
     end
   end
 
@@ -232,7 +232,7 @@ RSpec.describe 'merchants items index page' do
       create(:transaction, invoice: @invoice12, result: 'success')
       create(:transaction, invoice: @invoice13, result: 'success')
       create(:transaction, invoice: @invoice14, result: 'success')
-      visit "/merchants/#{@merch1.id}/items"
+      visit merchant_items_path(@merch1)
     end
 
     it 'top items best day' do

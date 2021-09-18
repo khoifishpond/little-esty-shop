@@ -20,7 +20,8 @@ class Item < ApplicationRecord
   end
 
   def ordered_invoices
-    invoices.order(:created_at)
+    invoices.group(:id)
+      .order(:created_at)
   end
 
   def best_day

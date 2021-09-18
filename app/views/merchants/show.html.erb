@@ -19,7 +19,7 @@
       <li><%= item.name %></li>
         <ul>
           <% item.ordered_invoices.each do |invoice| %>
-            <li><%= link_to invoice.id, merchant_invoice_path(id: invoice.id) %> Created At: <%= invoice.created_at_formatted %></li>
+            <li>Invoice #<%= link_to invoice.id, merchant_invoice_path(id: invoice.id) %> - <%= invoice.created_at_formatted %></li>
           <% end %>
         </ul>
     </section>
