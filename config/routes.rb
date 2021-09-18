@@ -12,9 +12,8 @@ Rails.application.routes.draw do
     resources :invoices
   end
 
-  resources :invoices, only: :update
-  resources :invoice_items, only: :update
+  resources :invoices, :invoice_items, only: :update
   resources :welcome, only: :index
 
-  get '/admin', to: 'admins#index'
+  get '/', to: 'welcome#index'
 end

@@ -143,7 +143,6 @@ RSpec.describe 'merchants items index page' do
       visit merchant_items_path(@merch1)
     end
 
-    # add appear_before
     it 'shows the 5 most popular items on the page' do
       expect(page).to have_content("Most Popular Items")
       expect(@item7.name).to appear_before(@item6.name)

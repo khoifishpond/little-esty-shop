@@ -28,7 +28,8 @@ RSpec.describe 'merchants items edit page' do
     fill_in('Name', with: 'Keyboard')
     fill_in('Description', with: 'RGB')
     fill_in('Unit price', with: 4000)
-    click_on "Submit"
+    
+    click_on "Update Item"
 
     expect(current_path).to eq(merchant_item_path(@merchant, @item1))
     expect(page).to have_content("Keyboard")

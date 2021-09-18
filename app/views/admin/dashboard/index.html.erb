@@ -6,9 +6,9 @@
 <section id="top-five-customers">
   <h3>Top 5 Customers</h3>
   <ol>
-    <% @customers.top_five.each do |cust| %>
-      <section id="customer-<%= cust.id %>">
-        <li><%= cust.first_name %> <%= cust.last_name %> - <%= cust.successful %> purchases</li>
+    <% @customers.top_five.each do |customer| %>
+      <section id="customer-<%= customer.id %>">
+        <li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.successful %> purchases</li>
       </section>
     <% end %>
   </ol>
