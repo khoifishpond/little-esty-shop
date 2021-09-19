@@ -13,7 +13,22 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'webmock/rspec'
+
 RSpec.configure do |config|
+  config.before(:each) do
+    json_response1 = File.read('spec/fixtures/repo_name.json')
+    stub_request(:get, "https://api.github.com/repos/hschmid516/little-esty-shop").
+      to_return(status: 200, body: json_response1)
+
+    json_response2 = File.read('spec/fixtures/pull_requests.json')
+    stub_request(:get, "https://api.github.com/search/issues?q=repo:hschmid516/little-esty-shop%20is:pull-request").
+      to_return(status: 200, body: json_response2)
+
+    json_response3 = File.read('spec/fixtures/contributors.json')
+    stub_request(:get, 'https://api.github.com/repos/hschmid516/little-esty-shop/stats/contributors').
+      to_return(status: 200, body: json_response3)
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
