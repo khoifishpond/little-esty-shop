@@ -24,20 +24,21 @@ RSpec.describe 'merchants items edit page' do
 
   it "allows us to enter new information and click submit" do
     visit edit_merchant_item_path(@merchant, @item1)
-
     fill_in('Name', with: 'Keyboard')
     fill_in('Description', with: 'RGB')
     fill_in('Unit price', with: 4000)
-    
     click_on "Update Item"
 
     expect(current_path).to eq(merchant_item_path(@merchant, @item1))
     expect(page).to have_content("Keyboard")
-    expect(page).to have_content("RGB")
-    expect(page).to have_content("$40.00")
-    expect(page).to_not have_content("Lamp")
-    expect(page).to_not have_content("Sheds light")
-    expect(page).to_not have_content(5)
     expect(page).to have_content("Item has been updated succesfully")
+
+    within("#item-#{@item1.id}") do
+      expect(page).to have_content("RGB")
+      expect(page).to have_content("$40.00")
+      expect(page).to_not have_content("Lamp")
+      expect(page).to_not have_content("Sheds light")
+      expect(page).to_not have_content(5)
+    end
   end
 end
