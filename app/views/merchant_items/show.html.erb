@@ -1,8 +1,10 @@
 <h1><%= @item.name %></h1>
 
-<ul>
-  <li>Description: <%= @item.description %></li>
-  <li>Item Price: <%= number_to_currency(@item.unit_price.fdiv(100)) %></li>
-</ul>
+<div id="item-<%= @item.id %>">
+  <ul>
+    <li>Description: <%= @item.description %></li>
+    <li>Item Price: <%= number_to_currency(@item.unit_price.fdiv(100)) %></li>
+  </ul>
+</div>
 
 <%= link_to "Update Item", edit_merchant_item_path(id: @item.id), method: :get %>
