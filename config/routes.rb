@@ -14,9 +14,9 @@ Rails.application.routes.draw do
 
   resources :invoices, :invoice_items, only: :update
   resources :users
+  resources :login, only: [:new, :create], controller: :sessions
 
   root 'welcome#index'
-
+  get '/logout', to: 'sessions#destroy'
   get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
 end
