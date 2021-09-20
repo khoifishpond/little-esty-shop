@@ -1,4 +1,4 @@
-class Admin::InvoicesController < ApplicationController
+class Admin::InvoicesController < AdminController
   def index
     @invoices = Invoice.all
   end
