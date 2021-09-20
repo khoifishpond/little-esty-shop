@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   end
 
   resources :invoices, :invoice_items, only: :update
-  resources :welcome, only: :index
+  resources :users
 
-  get '/', to: 'welcome#index'
+  root 'welcome#index'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
 end
