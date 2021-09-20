@@ -1,0 +1,15 @@
+<%= form_with model: @user, local: true do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+
+  <%= f.label :password %>
+  <%= f.text_field :password %>
+
+  <%= f.label :role, 'Role' %>
+  <%= f.radio_button :role, 'admin' %>
+  <%= f.label "Admin" %>
+  <%= f.radio_button :role, 'merchant' %>
+  <%= f.label "Merchant" %>
+
+  <%= f.submit %>
+<% end %>
