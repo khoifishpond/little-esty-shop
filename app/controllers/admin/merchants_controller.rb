@@ -1,4 +1,4 @@
-class Admin::MerchantsController < ApplicationController
+class Admin::MerchantsController < AdminController
   before_action :merchant_by_id, only: [:show, :edit, :update]
 
   def index
