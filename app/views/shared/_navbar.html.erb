@@ -9,6 +9,11 @@
         <%= link_to "Admin", admin_path %>
         <%= link_to "Merchants", merchants_path %>
       </div>
+      <div class="logout">
+        <% if current_user %>
+          <%= link_to "Log out", logout_path, method: :delete%>
+        <% end %>
+      </div>
     </div>
   </div>
 </nav>
