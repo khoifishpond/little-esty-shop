@@ -14,26 +14,25 @@
   <% end %>
 </ol>
 
+
+
 <h3>Enabled Merchants</h3>
 <section id="enabled">
-  <ul>
-    <% @merchants.enabled.each do |merchant| %>
-      <div id="merchant-<%= merchant.id %>">
-        <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
-        <%= button_to "Disable", merchant_path(merchant), method: :patch, params:{status: "disabled"} %>
-      </div>
-    <% end %>
-  </ul>
+  <% @merchants.enabled.each do |merchant| %>
+    <div id="merchant-<%= merchant.id %>" class="btn-group" role="group" aria-label="Basic example">
+      <%= link_to merchant.name, admin_merchant_path(merchant), class: "btn btn-secondary" %>
+      <%= button_to "Disable", merchant_path(merchant), method: :patch, params:{status: "disabled"}, class: "btn btn-secondary" %>
+    </div><br><br>
+  <% end %>
+
 </section>
 
 <h3>Disabled Merchants</h3>
 <section id="disabled">
-  <ul>
-    <% @merchants.disabled.each do |merchant| %>
-      <div id="merchant-<%= merchant.id %>">
-        <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
-        <%= button_to "Enable", merchant_path(merchant), method: :patch, params:{status: "enabled"} %>
-      </div>
-    <% end %>
-  </ul>
+  <% @merchants.disabled.each do |merchant| %>
+    <div id="merchant-<%= merchant.id %>" class="btn-group" role="group" aria-label="Basic example">
+      <%= link_to merchant.name, admin_merchant_path(merchant), class: "btn btn-secondary" %>
+      <%= button_to "Enable", merchant_path(merchant), method: :patch, params:{status: "enabled"}, class: "btn btn-secondary" %>
+    </div><br><br>
+  <% end %>
 </section>
