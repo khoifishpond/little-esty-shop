@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :require_user, :pull_request_api, :contributor_api, :repo_api
+  before_action :require_user, :contributor_api, :repo_api
 
   helper_method :current_user
 
@@ -19,7 +19,8 @@ class ApplicationController < ActionController::Base
 
   def repo_api
     repo_data = GithubService.new.repo
-    @repo = Repo.new(repo_data)
+    pr_data = GithubService.new.pull_requests
+    @repo = Repo.new(repo_data, pr_data)
   end
 
   def contributor_api
@@ -29,10 +30,5 @@ class ApplicationController < ActionController::Base
     @contributors = contributor_data.filter_map do |con|
       Contributor.new(con) unless users.include?(con[:author][:login])
     end
-  end
-
-  def pull_request_api
-    pr_data = GithubService.new.pull_requests
-    @pull_request = PullRequest.new(pr_data)
   end
 end

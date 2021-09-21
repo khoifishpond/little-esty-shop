@@ -25,7 +25,7 @@
   </body>
   <footer align="center">
     <p>GitHub Repo Name: <%= link_to @repo.name, @repo.url %></p>
-    <p>Number of Pull Requests: <%= @pull_request.total %></p>
+    <p>Number of Pull Requests: <%= @repo.pull_requests %></p>
     <p>Contributors:</p>
       <% @contributors.each do |contributor| %>
         <p><%= link_to contributor.name, contributor.url %> - <%= contributor.commits %> commits</p>
