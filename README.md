@@ -68,7 +68,7 @@ Little Esty Shop allowed us to apply priniciples of flow control across multiple
   <img src="https://img.shields.io/badge/REST-33b818.svg?&style=flaste&logo=REST&logoColor=white" />  
 </p>
 
-#### Setup
+### <ins>Setup</ins>
 
 * Ruby version
     ```bash
