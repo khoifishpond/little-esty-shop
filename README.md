@@ -1,38 +1,142 @@
 # Little Esty Shop
 
-## Background and Description
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/58891447/128744096-e92358e8-3cfa-4f2f-b4c9-3709b22e1963.png" alt="little_etsy_shop_db_schema"/>
+</p>
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+## Table of Contents
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+- [Overview](#overview)
+- [Tools Utilized](#framework)
+- [Contributing](#contributors)
+- [Setup](#setup)
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
 
-## Setup
+# README
+------
 
-This project requires Ruby 2.7.2.
+### <ins>Overview</ins>
 
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
+[Little Esty Shop](https://github.com/hschmid516/little-esty-shop) is a 10-day, 4 person project, during Mod 2 of 4 for Turing School's Back End Engineering Program.
 
-## Phases
+Our challenge was to build a functioning web app consisting of multiple relational databases to model the popular e-commerce web site *Etsy*.
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+Learning goals and areas of focus consisted of:
+
+- Apply principles of flow control across multiple methods
+- Design a one to many relationship using a schema designer
+- Write migrations to create tables with columns of varying data types and foreign keys.
+- Use Rails to create web pages that allow users to CRUD resources
+- Create instance and class methods on a Rails model that use ActiveRecord methods and helpers
+- Write model and feature tests that fully cover data logic and potential user behavior
+
+[Technical Requirements](https://github.com/turingschool-examples/little-esty-shop/blob/main/doc/user_stories.md)
+
+#### Framework
+<p>
+  <img src="https://img.shields.io/badge/Ruby%20On%20Rails-b81818.svg?&style=flat&logo=rubyonrails&logoColor=white" />
+</p>
+
+#### Languages
+<p>
+  <img src="https://img.shields.io/badge/Ruby-CC0000.svg?&style=flaste&logo=ruby&logoColor=white" />
+  <img src="https://img.shields.io/badge/ActiveRecord-CC0000.svg?&style=flaste&logo=rubyonrails&logoColor=white" />
+  <img src="https://img.shields.io/badge/HTML5-0EB201.svg?&style=flaste&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6.svg?&style=flaste&logo=css3&logoColor=white" />
+</p>
+
+#### Tools
+<p>
+  <img src="https://img.shields.io/badge/Atom-66595C.svg?&style=flaste&logo=atom&logoColor=white" />  
+  <img src="https://img.shields.io/badge/Git-F05032.svg?&style=flaste&logo=git&logoColor=white" />
+  <img src="https://img.shields.io/badge/GitHub-181717.svg?&style=flaste&logo=github&logoColor=white" />
+  <img src="https://img.shields.io/badge/Heroku-430098.svg?&style=flaste&logo=heroku&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1.svg?&style=flaste&logo=postgresql&logoColor=white" />
+</p>
+
+#### Gems
+<p>
+  <img src="https://img.shields.io/badge/rspec-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />
+  <img src="https://img.shields.io/badge/pry-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />  
+  <img src="https://img.shields.io/badge/simplecov-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />  
+  <img src="https://img.shields.io/badge/shoulda--matchers-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />  </br>
+  <img src="https://img.shields.io/badge/launchy-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />  
+  <img src="https://img.shields.io/badge/capybara-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />
+  <img src="https://img.shields.io/badge/orderly-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />
+  <img src="https://img.shields.io/badge/faraday-b81818.svg?&style=flaste&logo=rubygems&logoColor=white" />
+</p>
+
+#### Development Principles
+<p>
+  <img src="https://img.shields.io/badge/OOP-b81818.svg?&style=flaste&logo=OOP&logoColor=white" />
+  <img src="https://img.shields.io/badge/TDD-b87818.svg?&style=flaste&logo=TDD&logoColor=white" />
+  <img src="https://img.shields.io/badge/MVC-b8b018.svg?&style=flaste&logo=MVC&logoColor=white" />
+  <img src="https://img.shields.io/badge/REST-33b818.svg?&style=flaste&logo=REST&logoColor=white" />  
+</p>
+
+### <ins>Contributors</ins>
+
+ **Henry Schmid**
+- Github: [Henry Schmid](https://github.com/hschmid516)
+- LinkedIn: [Henry Schmid](https://www.linkedin.com/in/henry-schmid)
+
+ **Andrew Massey**
+- Github: [Andrew Massey](https://github.com/acmassey3698)
+- LinkedIn: [Andrew Massey](https://www.linkedin.com/in/andrew-massey-b06662194/)
+
+  **Khoi Nguyen**
+- Github: [Khoi Nguyen](https://github.com/khoifishpond)
+- LinkedIn: [Khoi Nguyen](https://www.linkedin.com/in/khoifishpond/)
+
+ **Kevin Mugele**
+- Github: [Kevin Mugele](https://github.com/kevinmugele)
+- LinkedIn: [Kevin Mugele](https://www.linkedin.com/in/kevinmugele/)
+
+
+
+#### Setup
+
+* Ruby version
+    ```bash
+    $ ruby -v
+    ruby 2.7.2p137 (2020-10-01 revision 5445e04352) [x86_64-darwin20]
+    ```
+
+* [System dependencies](https://github.com/hschmid516/little-esty-shop/blob/main/Gemfile)
+    ```bash
+    $ rails -v
+    Rails 5.2.6
+    ```
+
+* Database creation
+    ```bash
+    $ rails db:{drop,create,migrate}
+    Created database 'little_esty_shop_development'
+    Created database 'little_esty_shop_test'
+    ```
+
+* Database initialization
+    ```bash
+    $ rake csv_load:all
+    ```
+
+* How to run the test suite
+    ```bash
+    $ bundle exec rspec -fd
+    ```
+
+* [Local Deployment](http://localhost:3000), for testing:
+    ```bash
+    $ rails s
+    => Booting Puma
+    => Rails 5.2.6 application starting in development
+    => Run `rails server -h` for more startup options
+    Puma starting in single mode...
+    * Version 3.12.6 (ruby 2.7.2-p137), codename: Llamas in Pajamas
+    * Min threads: 5, max threads: 5
+    * Environment: development
+    * Listening on tcp://localhost:3000
+    Use Ctrl-C to stop
+
+    ```
+* [Heroku Deployment](https://floating-earth-36791.herokuapp.com/), for production
