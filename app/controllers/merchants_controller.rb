@@ -12,6 +12,7 @@ class MerchantsController < ApplicationController
     merchant.update(merchant_params)
 
     redirect_to admin_merchants_path
+    flash[:notice] = "Merchant has been updated succesfully"
   end
 
   def new

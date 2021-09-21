@@ -4,6 +4,7 @@ class InvoicesController < ApplicationController
     invoice.update(invoice_params)
 
     redirect_to admin_invoice_path(invoice)
+    flash[:notice] = "Invoice has been successfully updated"
   end
 
   private
