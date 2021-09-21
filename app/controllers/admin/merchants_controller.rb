@@ -11,7 +11,7 @@ class Admin::MerchantsController < AdminController
       flash[:notice] = "Merchant updated successfully"
     elsif
       redirect_to edit_admin_merchant_path(@merchant)
-      flash[:notice] = "Name cannot be blank"
+      flash[:danger] = "Name cannot be blank"
     end
   end
 

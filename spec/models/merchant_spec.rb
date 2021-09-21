@@ -160,21 +160,30 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'finds enabled merchants' do
-      @merch1 = create(:merchant)
-      @merch2 = create(:merchant)
-      @merch3 = create(:merchant, status: 0)
-      @merch4 = create(:merchant, status: 0)
+      @merch1 = create(:merchant, name: "Khoi")
+      @merch2 = create(:merchant, name: "Henry")
+      @merch3 = create(:merchant, status: 0, name: "Kevin")
+      @merch4 = create(:merchant, status: 0, name: "Andrew")
 
-      expect(Merchant.enabled).to eq([@merch3, @merch4])
+      expect(Merchant.enabled).to eq([@merch4, @merch3])
     end
 
-    it 'finds enabled merchants' do
-      @merch1 = create(:merchant)
-      @merch2 = create(:merchant)
-      @merch3 = create(:merchant, status: 0)
-      @merch4 = create(:merchant, status: 0)
+    it 'finds disabled merchants' do
+      @merch1 = create(:merchant, name: "Khoi")
+      @merch2 = create(:merchant, name: "Henry")
+      @merch3 = create(:merchant, status: 0, name: "Kevin")
+      @merch4 = create(:merchant, status: 0, name: "Andrew")
 
-      expect(Merchant.disabled).to eq([@merch1, @merch2])
+      expect(Merchant.disabled).to eq([@merch2, @merch1])
+    end
+
+    it 'lists merchants in alphabetical order' do
+      @merch1 = create(:merchant, name: "Khoi")
+      @merch2 = create(:merchant, name: "Henry")
+      @merch3 = create(:merchant, status: 0, name: "Kevin")
+      @merch4 = create(:merchant, status: 0, name: "Andrew")
+
+      expect(Merchant.alphabetical).to eq([@merch4, @merch2, @merch3, @merch1])
     end
 
     describe 'merchant top five and best day' do
