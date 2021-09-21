@@ -1,15 +1,16 @@
+<legend>Create New Account</legend>
 <%= form_with model: @user, local: true do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
+  <%= f.label :username, class: "form-label mt-4" %>
+  <%= f.text_field :username, class: "form-control", placeholder: "Enter username" %>
 
-  <%= f.label :password %>
-  <%= f.text_field :password %>
+  <%= f.label :password, class: "form-label mt-4" %>
+  <%= f.text_field :password, class: "form-control", placeholder: "Password" %>
 
-  <%= f.label :role, 'Role' %>
-  <%= f.radio_button :role, 'admin' %>
-  <%= f.label "Admin" %>
-  <%= f.radio_button :role, 'merchant' %>
-  <%= f.label "Merchant" %>
+  <legend class="mt-4">Role</legend>
+  <%= f.radio_button :role, 'admin', class: "form-check-input"  %>
+  <%= f.label "Admin" %><br>
+  <%= f.radio_button :role, 'merchant', class: "form-check-input" %>
+  <%= f.label "Merchant" %><br><br>
 
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>
