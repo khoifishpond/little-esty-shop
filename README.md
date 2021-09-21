@@ -19,16 +19,9 @@
 
 [Little Esty Shop](https://github.com/hschmid516/little-esty-shop) is a 10-day, 4 person project, during Mod 2 of 4 for Turing School's Back End Engineering Program.
 
-Our challenge was to build a functioning web app consisting of multiple relational databases to model the popular e-commerce web site *Etsy*.
+Our challenge was to build a functioning web app consisting of multiple relational databases to model the popular e-commerce web site *Little Etsy Shop*.
 
-Learning goals and areas of focus consisted of:
-
-- Apply principles of flow control across multiple methods
-- Design a one to many relationship using a schema designer
-- Write migrations to create tables with columns of varying data types and foreign keys.
-- Use Rails to create web pages that allow users to CRUD resources
-- Create instance and class methods on a Rails model that use ActiveRecord methods and helpers
-- Write model and feature tests that fully cover data logic and potential user behavior
+Little Esty Shop allowed us to apply priniciples of flow control across multiple methods, design one-to-many relationships using [DB Designer](https://www.dbdesigner.net/), and write migrations to create tables with columns of varying data types and foreign keys. Ruby on Rails helped gave us a framework to create instance and class methods on a Rails model that uses ActiveRecord methods and helpers, letting our users experience CRUD functionality through our application. By maintaining a TDD mindset, we were able to make sure our features and models were being test consitently throughout the development process.
 
 [Technical Requirements](https://github.com/turingschool-examples/little-esty-shop/blob/main/doc/user_stories.md)
 
@@ -47,7 +40,8 @@ Learning goals and areas of focus consisted of:
 
 #### Tools
 <p>
-  <img src="https://img.shields.io/badge/Atom-66595C.svg?&style=flaste&logo=atom&logoColor=white" />  
+  <img src="https://img.shields.io/badge/Atom-66595C.svg?&style=flaste&logo=atom&logoColor=white" />
+  <img src="https://img.shields.io/badge/--007ACC?logo=visual%20studio%20code&logoColor=ffffff" />
   <img src="https://img.shields.io/badge/Git-F05032.svg?&style=flaste&logo=git&logoColor=white" />
   <img src="https://img.shields.io/badge/GitHub-181717.svg?&style=flaste&logo=github&logoColor=white" />
   <img src="https://img.shields.io/badge/Heroku-430098.svg?&style=flaste&logo=heroku&logoColor=white" />
