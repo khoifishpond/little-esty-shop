@@ -132,7 +132,6 @@ describe "User registration form", :logged_out do
   it 'must be signed in to access merchants or admin page', :logged_out do
     visit merchants_path
 
-
     expect(current_path).to eq(root_path)
     expect(page).to have_content("You must sign in or create an account to access site")
   end
