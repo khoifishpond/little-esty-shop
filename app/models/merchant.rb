@@ -7,6 +7,10 @@ class Merchant < ApplicationRecord
     disabled: 1
   }
 
+  def self.alphabetical
+    order(:name)
+  end
+
   def self.enabled
     where(status: 0).order(:name)
   end

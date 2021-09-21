@@ -177,6 +177,15 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.disabled).to eq([@merch2, @merch1])
     end
 
+    it 'lists merchants in alphabetical order' do
+      @merch1 = create(:merchant, name: "Khoi")
+      @merch2 = create(:merchant, name: "Henry")
+      @merch3 = create(:merchant, status: 0, name: "Kevin")
+      @merch4 = create(:merchant, status: 0, name: "Andrew")
+
+      expect(Merchant.alphabetical).to eq([@merch4, @merch2, @merch3, @merch1])
+    end
+
     describe 'merchant top five and best day' do
       before :each do
         @merch1 = create(:merchant)
