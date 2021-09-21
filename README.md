@@ -1,7 +1,7 @@
 # Little Esty Shop
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/58891447/128744096-e92358e8-3cfa-4f2f-b4c9-3709b22e1963.png" alt="little_etsy_shop_db_schema"/>
+  <img src="https://user-images.githubusercontent.com/78242081/134249617-009366df-7ec0-4330-91ec-48809562c526.png" alt="little_etsy_shop_db_schema"/>
 </p>
 
 ## Table of Contents
