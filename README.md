@@ -8,8 +8,8 @@
 
 - [Overview](#overview)
 - [Tools Utilized](#framework)
-- [Contributing](#contributors)
 - [Setup](#setup)
+- [Contributors](#contributors)
 
 
 # README
