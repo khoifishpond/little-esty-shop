@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :require_user
-  # :pull_request_api, :contributor_api, :repo_api
+  before_action :require_user, :pull_request_api, :contributor_api, :repo_api
 
   helper_method :current_user
 
@@ -10,7 +9,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    redirect_to root_path unless current_user
+    unless current_user
+       redirect_to root_path
+       flash[:notice] = "You must sign in or create an account to access site"
+    end
   end
 
   private

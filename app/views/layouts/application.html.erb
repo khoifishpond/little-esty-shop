@@ -24,13 +24,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
   </body>
   <footer align="center">
-    <% if 1 == 2 %>
     <p>GitHub Repo Name: <%= link_to @repo.name, @repo.url %></p>
     <p>Number of Pull Requests: <%= @pull_request.total %></p>
     <p>Contributors:</p>
       <% @contributors.each do |contributor| %>
         <p><%= link_to contributor.name, contributor.url %> - <%= contributor.commits %> commits</p>
-      <% end %>
       <% end %>
   </footer>
 </html>
