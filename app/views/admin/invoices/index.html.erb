@@ -3,10 +3,10 @@
 <%= render 'shared/admin_nav' %><br>
 <br>
 
-<% @invoices.each do |invoice| %>
-  <ul>
-    <div id="invoice-<%= invoice.id %>">
-      <li>Invoice #<%= link_to "#{invoice.id}", admin_invoice_path(id: invoice.id) %></li>
-    </div>
-  </ul>
-<% end %>
+<div class="btn-group-vertical">
+  <% @invoices.each do |invoice| %>
+      <section id="invoice-<%= invoice.id %>">
+        <%= link_to "Invoice ##{invoice.id}", admin_invoice_path(id: invoice.id), class: "btn btn-primary" %>
+      </section>
+  <% end %>
+</div>
