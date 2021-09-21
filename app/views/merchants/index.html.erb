@@ -1,7 +1,7 @@
-<h1>All Merchants</h1>
+<h1>All Merchants</h1><br>
 
-<% @merchants.each do |merchant| %>
-  <ul>
-    <li><%= link_to merchant.name, merchant_dashboard_path(merchant_id: merchant.id) %></li>
-  </ul>
-<% end %>
+<div class="btn-group-vertical">
+  <% @merchants.each do |merchant| %>
+      <%= link_to merchant.name, merchant_dashboard_path(merchant_id: merchant.id), class: "btn btn-primary" %>
+  <% end %>
+</div>
