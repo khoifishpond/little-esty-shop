@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :pull_request_api, :require_user, :contributor_api, :repo_api
+  before_action :require_user
+  # :pull_request_api, :contributor_api, :repo_api
 
   helper_method :current_user
 
