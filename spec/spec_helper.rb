@@ -30,16 +30,16 @@ RSpec.configure do |config|
       to_return(status: 200, body: json_response3)
   end
 
-  # config.before :each, type: :feature do |test|
-  #   if !test.metadata[:logged_out]
-  #     User.create(username: 'user', password_digest: 'password', role: 1)
-  #     visit "/"
-  #     click_link "Log In"
-  #     fill_in(:name, with: 'user')
-  #     fill_in(:password, with: 'password')
-  #     click_button('Log In')
-  #   end
-  # end
+  config.before :each, type: :feature do |test|
+    if !test.metadata[:logged_out]
+      User.create!(username: 'user', password: 'password', role: 0)
+      visit "/"
+      click_link "Log In"
+      fill_in(:name, with: 'user')
+      fill_in(:password, with: 'password')
+      click_button('Log In')
+    end
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
