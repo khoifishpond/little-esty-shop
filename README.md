@@ -68,25 +68,6 @@ Little Esty Shop allowed us to apply priniciples of flow control across multiple
   <img src="https://img.shields.io/badge/REST-33b818.svg?&style=flaste&logo=REST&logoColor=white" />  
 </p>
 
-### <ins>Contributors</ins>
-<p>
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
-</p>
-
-- [Andrew Massey](https://www.linkedin.com/in/andrew-massey-b06662194/)
-- [Henry Schmid](https://www.linkedin.com/in/henry-schmid)
-- [Kevin Mugele](https://www.linkedin.com/in/kevinmugele/)
-- [Khoi Nguyen](https://www.linkedin.com/in/khoifishpond/)
-
-<p>
-  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
-</p>
-
-- [Andrew Massey](https://github.com/acmassey3698)
-- [Henry Schmid](https://github.com/hschmid516)
-- [Kevin Mugele](https://github.com/kevinmugele)
-- [Khoi Nguyen](https://github.com/khoifishpond)
-
 #### Setup
 
 * Ruby version
@@ -133,3 +114,22 @@ Little Esty Shop allowed us to apply priniciples of flow control across multiple
 
     ```
 * [Heroku Deployment](https://floating-earth-36791.herokuapp.com/), for production
+
+### <ins>Contributors</ins>
+<p>
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+</p>
+
+- [Andrew Massey](https://www.linkedin.com/in/andrew-massey-b06662194/)
+- [Henry Schmid](https://www.linkedin.com/in/henry-schmid)
+- [Kevin Mugele](https://www.linkedin.com/in/kevinmugele/)
+- [Khoi Nguyen](https://www.linkedin.com/in/khoifishpond/)
+
+<p>
+  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
+</p>
+
+- [Andrew Massey](https://github.com/acmassey3698)
+- [Henry Schmid](https://github.com/hschmid516)
+- [Kevin Mugele](https://github.com/kevinmugele)
+- [Khoi Nguyen](https://github.com/khoifishpond)
