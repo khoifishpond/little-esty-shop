@@ -69,24 +69,23 @@ Little Esty Shop allowed us to apply priniciples of flow control across multiple
 </p>
 
 ### <ins>Contributors</ins>
+<p>
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+</p>
 
- **Henry Schmid**
-- Github: [Henry Schmid](https://github.com/hschmid516)
-- LinkedIn: [Henry Schmid](https://www.linkedin.com/in/henry-schmid)
+- [Andrew Massey](https://www.linkedin.com/in/andrew-massey-b06662194/)
+- [Henry Schmid](https://www.linkedin.com/in/henry-schmid)
+- [Kevin Mugele](https://www.linkedin.com/in/kevinmugele/)
+- [Khoi Nguyen](https://www.linkedin.com/in/khoifishpond/)
 
- **Andrew Massey**
-- Github: [Andrew Massey](https://github.com/acmassey3698)
-- LinkedIn: [Andrew Massey](https://www.linkedin.com/in/andrew-massey-b06662194/)
+<p>
+  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
+</p>
 
-  **Khoi Nguyen**
-- Github: [Khoi Nguyen](https://github.com/khoifishpond)
-- LinkedIn: [Khoi Nguyen](https://www.linkedin.com/in/khoifishpond/)
-
- **Kevin Mugele**
-- Github: [Kevin Mugele](https://github.com/kevinmugele)
-- LinkedIn: [Kevin Mugele](https://www.linkedin.com/in/kevinmugele/)
-
-
+- [Andrew Massey](https://github.com/acmassey3698)
+- [Henry Schmid](https://github.com/hschmid516)
+- [Kevin Mugele](https://github.com/kevinmugele)
+- [Khoi Nguyen](https://github.com/khoifishpond)
 
 #### Setup
 
