@@ -34,6 +34,7 @@ class MerchantItemsController < ApplicationController
 
     if item.save
       redirect_to merchant_items_path(merchant)
+      flash[:notice] = "Item has been created succesfully"
     else
       flash[:notice] = "Item not created. Information missing"
       redirect_to new_merchant_item_path(merchant)
@@ -41,7 +42,7 @@ class MerchantItemsController < ApplicationController
   end
 
   private
-  
+
   def item_params
     params.permit(:name, :description, :unit_price, :enable)
   end
