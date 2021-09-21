@@ -91,6 +91,24 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+footer {
+   /* position: fixed; */
+   height: 30;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+   background-color: rgb(200, 210, 227)
+}
+
+#welcome-bgd {
+  background-image: url(home.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
 hr {
   margin: 1rem 0;
   color: inherit;
