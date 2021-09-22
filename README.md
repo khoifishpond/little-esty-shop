@@ -40,7 +40,7 @@ Little Esty Shop allowed us to apply priniciples of flow control across multiple
 #### Tools
 <p>
   <img src="https://img.shields.io/badge/Atom-66595C.svg?&style=flaste&logo=atom&logoColor=white" />
-  <img src="https://img.shields.io/badge/VSCode-007ACC?logo=visual%20studio%20code&logoColor=ffffff" />
+  <img src="https://img.shields.io/badge/VS_Code-007ACC?logo=visual%20studio%20code&logoColor=ffffff" />
   <img src="https://img.shields.io/badge/Git-F05032.svg?&style=flaste&logo=git&logoColor=white" />
   <img src="https://img.shields.io/badge/GitHub-181717.svg?&style=flaste&logo=github&logoColor=white" />
   <img src="https://img.shields.io/badge/Heroku-430098.svg?&style=flaste&logo=heroku&logoColor=white" />
