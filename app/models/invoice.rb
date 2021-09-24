@@ -3,6 +3,7 @@ class Invoice < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :invoice_items, dependent: :destroy
   has_many :items, through: :invoice_items
+  
 
   enum status: {
     'in progress': 0,
@@ -32,5 +33,33 @@ class Invoice < ApplicationRecord
 
   def total_revenue
     invoice_items.where(invoice_id: id).sum('quantity * unit_price')
+  end
+
+  def discount
+    # poop = invoice_items
+    #   .joins(item: {merchant: :bulk_discounts})
+    #   .select('invoice_items.*, bulk_discounts.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS invoice_discount')
+    #   .group('invoices.id, merchants.id')
+    #   .where(invoice_id: id)
+
+    # poop = invoice_items
+    #   .joins(item: {merchant: :bulk_discounts})
+    #   .sum('(invoice_items.quantity * (1 - discount) * invoice_items.unit_price)')
+  
+    # quantity = poop.first.quantity
+
+    # discount = poop.first
+    #   .item
+    #   .merchant
+    #   .bulk_discounts
+    #   .where('bulk_discounts.quantity_threshold <= ?', quantity)
+
+    
+
+    require 'pry'; binding.pry
+  end
+
+  def discounted_revenue
+    total_revenue - discount
   end
 end

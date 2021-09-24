@@ -4,6 +4,9 @@ RSpec.describe 'Merchant Invoices Show page' do
   before(:each) do
     @merch1 = create(:merchant)
     @merch2 = create(:merchant)
+    @discount10 = @merch1.bulk_discounts.create(percentage_discount: 10, quantity_threshold: 10)
+    @discount15 = @merch1.bulk_discounts.create(percentage_discount: 15, quantity_threshold: 15)
+    @discount20 = @merch1.bulk_discounts.create(percentage_discount: 20, quantity_threshold: 20)
     @cust1 = create(:customer)
     @cust2 = create(:customer)
     @cust3 = create(:customer)
@@ -26,7 +29,8 @@ RSpec.describe 'Merchant Invoices Show page' do
     @invoice7 = create(:invoice, customer: @cust7)
     @invoice8 = create(:invoice, customer: @cust7)
     @ii1 = InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 15, unit_price: 1000)
-    @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 11, unit_price: 4000)
+    @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 9, unit_price: 4000)
+    InvoiceItem.create(item: @item4, invoice: @invoice1, status: 1, quantity: 13, unit_price: 2000)
     InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item1, invoice: @invoice2)
     InvoiceItem.create(item: @item1, invoice: @invoice3)
@@ -51,6 +55,7 @@ RSpec.describe 'Merchant Invoices Show page' do
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
     create(:transaction, invoice: @invoice6, result: 'success')
+    
     visit merchant_invoice_path(@merch1, @invoice1)
   end
 
@@ -111,5 +116,9 @@ RSpec.describe 'Merchant Invoices Show page' do
     within("#table-#{@ii2.id}") do
       expect(find(:css, 'select#invoice_item_status').value ).to eq('pending')
     end
+  end
+
+  it 'shows total revenue for my merchant from invoice and total discounted revenue' do
+    
   end
 end
