@@ -20,7 +20,8 @@ class Item < ApplicationRecord
   end
 
   def ordered_invoices
-    invoices.group(:id)
+    invoices
+      .group(:id)
       .order(:created_at)
   end
 

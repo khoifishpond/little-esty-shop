@@ -40,12 +40,14 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_to_ship
-    items.joins(:invoice_items)
+    items
+      .joins(:invoice_items)
       .where.not('invoice_items.status = ?', 2)
   end
 
   def top_five_items
-    items.joins(invoice_items: {invoice: :transactions})
+    items
+      .joins(invoice_items: {invoice: :transactions})
       .select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue")
       .merge(Transaction.purchase)
       .group(:id)
@@ -54,14 +56,16 @@ class Merchant < ApplicationRecord
   end
 
   def all_invoices
-    Invoice.joins(:items)
+    Invoice
+      .joins(:items)
       .where("items.merchant_id = ?", id)
       .group(:id)
       .order(:id)
   end
 
   def best_day
-    Merchant.joins(items: {invoice_items: :invoice})
+    Merchant
+      .joins(items: {invoice_items: :invoice})
       .select("merchants.*, invoices.created_at AS date_created, SUM(invoice_items.quantity * invoice_items.unit_price) AS sales")
       .where("merchants.id = ?", id)
       .group(:id, :date_created)
