@@ -29,8 +29,7 @@ RSpec.describe 'Merchant Invoices Show page' do
     @invoice7 = create(:invoice, customer: @cust7)
     @invoice8 = create(:invoice, customer: @cust7)
     @ii1 = InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 15, unit_price: 1000)
-    @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 9, unit_price: 4000)
-    InvoiceItem.create(item: @item4, invoice: @invoice1, status: 1, quantity: 13, unit_price: 2000)
+    @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 11, unit_price: 4000)
     InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item1, invoice: @invoice2)
     InvoiceItem.create(item: @item1, invoice: @invoice3)
@@ -118,7 +117,7 @@ RSpec.describe 'Merchant Invoices Show page' do
     end
   end
 
-  it 'shows total revenue for my merchant from invoice and total discounted revenue' do
-    
+  it 'shows total discounted revenue' do
+    expect(page).to have_content("$52,350.00")
   end
 end

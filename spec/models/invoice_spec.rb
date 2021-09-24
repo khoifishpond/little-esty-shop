@@ -11,6 +11,9 @@ RSpec.describe Invoice, type: :model do
   describe 'instance methods' do
     before(:each) do
       @merch1 = create(:merchant)
+      @discount10 = @merch1.bulk_discounts.create(percentage_discount: 10, quantity_threshold: 10)
+      @discount15 = @merch1.bulk_discounts.create(percentage_discount: 15, quantity_threshold: 15)
+      @discount20 = @merch1.bulk_discounts.create(percentage_discount: 20, quantity_threshold: 20)
       @cust1 = create(:customer)
       @cust2 = create(:customer)
       @cust3 = create(:customer)
@@ -29,7 +32,7 @@ RSpec.describe Invoice, type: :model do
       @invoice6 = create(:invoice, customer: @cust6)
       @invoice7 = create(:invoice, customer: @cust7)
       @invoice8 = create(:invoice, customer: @cust7)
-      InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 3, unit_price: 1000)
+      InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 17, unit_price: 1000)
       InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
       InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
       InvoiceItem.create(item: @item1, invoice: @invoice2)
@@ -78,7 +81,11 @@ RSpec.describe Invoice, type: :model do
     end
 
     it '#total_revenue' do
-      expect(@invoice1.total_revenue).to eq(3000)
+      expect(@invoice1.total_revenue).to eq(17000)
+    end
+
+    it '#discounted_revenue' do
+      expect(@invoice1.discounted_revenue).to eq(14450)
     end
   end
 end
