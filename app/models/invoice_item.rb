@@ -15,15 +15,18 @@ class InvoiceItem < ApplicationRecord
       .bulk_discounts
       .where('bulk_discounts.quantity_threshold <= ?', quantity)
       .order('bulk_discounts.percentage_discount desc')
+      .first
   end
 
   private
 
   def set_discount
-    if !self.discounts.empty?
-      self.discount = discounts.first.percentage_discount
+    if !self.discounts.nil?
+      self.discount = discounts.percentage_discount
+      self.discount_id = discounts.id
     else
       self.discount = 0
+      self.discount_id = nil
     end
   end
 end
