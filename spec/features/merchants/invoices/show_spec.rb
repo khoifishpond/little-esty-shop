@@ -120,4 +120,12 @@ RSpec.describe 'Merchant Invoices Show page' do
   it 'shows total discounted revenue' do
     expect(page).to have_content("$52,350.00")
   end
+
+  it 'has a link to a bulk discount show page for each invoice item, if applicable' do
+    within("#table-#{@ii1.id}") do
+      click_link 'Discount'
+    end
+
+    expect(current_path).to eq(merchant_bulk_discount_path(@merch1, @discount15))
+  end
 end

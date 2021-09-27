@@ -12,6 +12,7 @@
       <th scope="col">Item Name</th>
       <th scope="col">Quantity</th>
       <th scope="col">Unit Price</th>
+      <th scope="col">Discount</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
@@ -21,12 +22,19 @@
         <td><%= invoice_item.item.name %></td>
         <td><%= invoice_item.quantity %></td>
         <td><%= number_to_currency(@invoice.item_unit_price(invoice_item.item.id).fdiv(100)) %></td>
-        <td><%= form_with model: invoice_item, local: true do |f| %>
-              <%= f.hidden_field :merchant_id, value: invoice_item.item.merchant.id %>
-              <%= f.hidden_field :invoice_id, value: @invoice.id %>
-              <%= f.select :status, ["pending", "packaged", "shipped"], selected: invoice_item.status, class: "form-select" %>
-              <%= f.submit 'Update Item Status', class: "btn btn-secondary" %>
-            <% end %></td>
+        <td>
+          <% if invoice_item.discount_id != nil %>
+            <%= link_to 'Discount', merchant_bulk_discount_path(invoice_item.item.merchant, id: invoice_item.discounts ) %>
+          <% end %>
+        </td>
+        <td>
+          <%= form_with model: invoice_item, local: true do |f| %>
+            <%= f.hidden_field :merchant_id, value: invoice_item.item.merchant.id %>
+            <%= f.hidden_field :invoice_id, value: @invoice.id %>
+            <%= f.select :status, ["pending", "packaged", "shipped"], selected: invoice_item.status, class: "form-select" %>
+            <%= f.submit 'Update Item Status', class: "btn btn-secondary" %>
+          <% end %>
+        </td>
       </tr>
     </div>
   <% end %>
