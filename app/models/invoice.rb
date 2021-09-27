@@ -3,6 +3,7 @@ class Invoice < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :invoice_items, dependent: :destroy
   has_many :items, through: :invoice_items
+  
 
   enum status: {
     'in progress': 0,
@@ -32,5 +33,10 @@ class Invoice < ApplicationRecord
 
   def total_revenue
     invoice_items.where(invoice_id: id).sum('quantity * unit_price')
+  end
+
+  def discounted_revenue
+    discounted = invoice_items.sum('(invoice_items.quantity * (invoice_items.discount) * invoice_items.unit_price) / 100')
+    total_revenue - discounted
   end
 end

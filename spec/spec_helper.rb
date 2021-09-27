@@ -28,6 +28,16 @@ RSpec.configure do |config|
     json_response3 = File.read('spec/fixtures/contributors.json')
     stub_request(:get, 'https://api.github.com/repos/hschmid516/little-esty-shop/stats/contributors').
       to_return(status: 200, body: json_response3)
+    
+    json_response4 = File.read('spec/fixtures/holidays.json')
+    stub_request(:get, "https://date.nager.at/api/v3/NextPublicHolidays/US").
+        with(
+          headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'User-Agent'=>'Faraday v1.8.0'
+          }).
+        to_return(status: 200, body: json_response4, headers: {})
   end
 
   config.before :each, type: :feature do |test|
