@@ -23,7 +23,7 @@ describe 'merchant dashboard page' do
     @invoice6 = create(:invoice, customer: @cust6)
     @invoice7 = create(:invoice, customer: @cust7)
     @invoice8 = create(:invoice, customer: @cust7)
-    InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1)
+    InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 1, unit_price: 1000)
     InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item1, invoice: @invoice2)

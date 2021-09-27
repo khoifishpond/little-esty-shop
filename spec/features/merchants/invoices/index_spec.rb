@@ -30,7 +30,7 @@ RSpec.describe 'Merchant invoices index page' do
     InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item1, invoice: @invoice2)
-    InvoiceItem.create(item: @item1, invoice: @invoice3)
+    InvoiceItem.create(item: @item1, invoice: @invoice3, status: 1, quantity: 1, unit_price: 1000)
     InvoiceItem.create(item: @item1, invoice: @invoice4)
     InvoiceItem.create(item: @item1, invoice: @invoice5)
     InvoiceItem.create(item: @item4, invoice: @invoice6)
