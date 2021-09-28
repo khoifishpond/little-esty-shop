@@ -32,11 +32,28 @@ class Invoice < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items.where(invoice_id: id).sum('quantity * unit_price')
+    invoice_items
+      .where(invoice_id: id)
+      .sum('quantity * unit_price')
+  end
+
+  def merchant_total_revenue(merchant_id)
+    invoice_items
+      .joins(:item)
+      .where('items.merchant_id = ?', merchant_id)
+      .sum('invoice_items.quantity * invoice_items.unit_price')
   end
 
   def discounted_revenue
-    discounted = invoice_items.sum('(invoice_items.quantity * (invoice_items.discount) * invoice_items.unit_price) / 100')
+    discounted = invoice_items.sum('(invoice_items.quantity * invoice_items.discount * invoice_items.unit_price) / 100')
     total_revenue - discounted
+  end
+
+  def merchant_discounted_revenue(merchant_id)
+    discounted = invoice_items
+                  .joins(:item)
+                  .where('items.merchant_id = ?', merchant_id)
+                  .sum('(invoice_items.quantity * invoice_items.discount * invoice_items.unit_price) / 100')
+    merchant_total_revenue(merchant_id) - discounted
   end
 end

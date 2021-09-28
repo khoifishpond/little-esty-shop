@@ -2,8 +2,8 @@
 
 <p>Status: <%= @invoice.status %></p>
 <p>Date Created: <%= @invoice.created_at_formatted %></p>
-<p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
-<p>Total Discounted Revenue: <%= number_to_currency(@invoice.discounted_revenue) %></p>
+<p>Total Revenue: <%= number_to_currency(@invoice.merchant_total_revenue(@merchant.id).fdiv(100)) %></p>
+<p>Total Discounted Revenue: <%= number_to_currency(@invoice.merchant_discounted_revenue(@merchant.id).fdiv(100)) %></p>
 <p>Customer Name: <%= @invoice.customer_by_id.first_name %> <%= @invoice.customer_by_id.last_name %></p>
 
 <table class="table table-hover">
@@ -24,7 +24,7 @@
         <td><%= number_to_currency(@invoice.item_unit_price(invoice_item.item.id).fdiv(100)) %></td>
         <td>
           <% if invoice_item.discount_id != nil %>
-            <%= link_to 'Discount', merchant_bulk_discount_path(invoice_item.item.merchant, id: invoice_item.discounts ) %>
+            <%= link_to 'Discount', merchant_bulk_discount_path(@merchant, invoice_item.discounts ) %>
           <% end %>
         </td>
         <td>

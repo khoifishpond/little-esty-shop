@@ -30,6 +30,7 @@ RSpec.describe 'Merchant Invoices Show page' do
     @invoice8 = create(:invoice, customer: @cust7)
     @ii1 = InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1, quantity: 15, unit_price: 1000)
     @ii2 = InvoiceItem.create(item: @item2, invoice: @invoice1, status: 1, quantity: 11, unit_price: 4000)
+    InvoiceItem.create(item: @item4, invoice: @invoice1, status: 1, quantity: 11, unit_price: 4000)
     InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
     InvoiceItem.create(item: @item1, invoice: @invoice2)
     InvoiceItem.create(item: @item1, invoice: @invoice3)
@@ -76,13 +77,12 @@ RSpec.describe 'Merchant Invoices Show page' do
     expect(page).to have_content(@invoice1.item_status(@item2.id))
 
     expect(page).to_not have_content(@item3.name)
-    expect(page).to_not have_content(@item4.name)
     expect(page).to_not have_content(@item5.name)
     expect(page).to_not have_content(@item6.name)
   end
 
   it 'shows total revenue' do
-    expect(page).to have_content('$59,000')
+    expect(page).to have_content('$590.00')
   end
 
   it 'has a select box for invoice status' do
@@ -118,7 +118,7 @@ RSpec.describe 'Merchant Invoices Show page' do
   end
 
   it 'shows total discounted revenue' do
-    expect(page).to have_content("$52,350.00")
+    expect(page).to have_content("$523.50")
   end
 
   it 'has a link to a bulk discount show page for each invoice item, if applicable' do
